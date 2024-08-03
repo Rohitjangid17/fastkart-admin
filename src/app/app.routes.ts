@@ -4,7 +4,7 @@ import { ProductComponent } from './pages/product/product.component';
 
 export const routes: Routes = [
     {
-        path: "", redirectTo: "dashboard", pathMatch: "full"
+        path: "", redirectTo: "/dashboard", pathMatch: "full"
     },
     {
         path: "dashboard", component: DashboardComponent

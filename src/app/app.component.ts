@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, AfterViewInit, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './layout/header/header.component';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
@@ -10,6 +10,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 @Component({
   selector: 'app-root',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     RouterOutlet,
     HeaderComponent,
@@ -26,7 +27,10 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   sidebarMode: 'side' | 'over' = 'side';
   private breakpointSubscription!: Subscription;
 
-  constructor(private breakpointObserver: BreakpointObserver) { }
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    private cdr: ChangeDetectorRef // Inject ChangeDetectorRef
+  ) { }
 
   ngOnInit() {
     // Initial setup: Hide sidebar
@@ -35,9 +39,18 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
+    // Initialize the sidebar state after the view has been initialized
+    this.breakpointSubscription = this.breakpointObserver.observe([
+      Breakpoints.Handset
+    ]).subscribe(result => {
+      this.updateSidebarState(result.matches);
+      this.cdr.detectChanges(); // Manually trigger change detection
+    });
+
     // Ensure the sidebar is shown after the page has fully loaded
     setTimeout(() => {
       this.initializeSidebarState();
+      this.cdr.detectChanges(); // Manually trigger change detection
     }, 100); // Adjust the delay if needed
   }
 
