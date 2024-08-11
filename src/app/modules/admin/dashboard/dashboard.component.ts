@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TitleService } from '../../../shared/services/title.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,4 +10,9 @@ import { Component } from '@angular/core';
 })
 export class DashboardComponent {
 
+  constructor(
+    private _titleService: TitleService
+  ) {
+    this._titleService.setTitle("Fastkart | Dashboard");
+  }
 }

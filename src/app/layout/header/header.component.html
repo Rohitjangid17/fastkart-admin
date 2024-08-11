@@ -1,4 +1,4 @@
-<mat-toolbar>
+<mat-toolbar class="bg-white shadow-lg">
     <mat-toolbar-row class="justify-content-between">
         <button type="button" (click)="toggleSidebar()">
             <mat-icon mat-icon-button>menu</mat-icon>
@@ -7,24 +7,32 @@
         <div class="row mr-2 ml-auto">
             <ul>
                 <li>
-                    <button mat-button [matMenuTriggerFor]="menu" class="user mt-2 d-flex align-items-center">
-                        user
+                    <button mat-button [matMenuTriggerFor]="menu" class="user flex items-center">
+                        <i><img src="../../../assets/user_image.jpg" class="h-10 w-10 object-cover rounded-full"
+                                alt="user image"></i>
                     </button>
-                    <mat-menu #menu="matMenu">
+                    <mat-menu #menu="matMenu" class="!w-[500px]">
                         <button mat-menu-item>
                             <mat-icon class="user-image-icon ml-1">dialpad</mat-icon>
-                            <span>Redial</span>
-                        </button>
-                        <button mat-menu-item disabled>
-                            <mat-icon>voicemail</mat-icon>
-                            <span>Check voice mail</span>
+                            <span class="text-md">Users</span>
                         </button>
                         <button mat-menu-item>
-                            <mat-icon>notifications_off</mat-icon>
-                            <span>Disable alerts</span>
+                            <mat-icon class="user-image-icon ml-1">dialpad</mat-icon>
+                            <span class="text-md">Orders</span>
+                        </button>
+                        <button mat-menu-item>
+                            <mat-icon class="user-image-icon ml-1">dialpad</mat-icon>
+                            <span class="text-md">Support Ticket</span>
+                        </button>
+                        <button mat-menu-item>
+                            <mat-icon class="user-image-icon ml-1">dialpad</mat-icon>
+                            <span class="text-md">Settings</span>
+                        </button>
+                        <button mat-menu-item>
+                            <mat-icon class="user-image-icon ml-1">dialpad</mat-icon>
+                            <span class="text-md">Logout</span>
                         </button>
                     </mat-menu>
-
                 </li>
             </ul>
         </div>

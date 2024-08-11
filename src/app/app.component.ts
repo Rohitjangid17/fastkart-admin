@@ -6,6 +6,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { Subscription } from 'rxjs';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { FooterComponent } from './layout/footer/footer.component';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,8 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
     HeaderComponent,
     SidebarComponent,
     MatSidenavModule,
-    MatToolbarModule
+    MatToolbarModule,
+    FooterComponent
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']

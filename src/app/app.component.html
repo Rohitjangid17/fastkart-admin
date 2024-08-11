@@ -3,7 +3,8 @@
     <app-sidebar />
   </mat-drawer>
   <mat-drawer-content>
-    <app-header (toggleSidebarForMe)="sidebarToggler()"></app-header>
+    <app-header (toggleSidebarForMe)="sidebarToggler()" />
     <router-outlet />
+    <app-footer />
   </mat-drawer-content>
 </mat-drawer-container>
