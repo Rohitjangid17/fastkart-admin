@@ -73,7 +73,7 @@
                                             <mat-icon>remove_red_eye</mat-icon>
                                             <span>Order Details</span>
                                         </button>
-                                        <button class="!text-[18px]" mat-menu-item>
+                                        <button class="!text-[18px]" [routerLink]="'/update-product/' + product._id" mat-menu-item>
                                             <mat-icon>edit</mat-icon>
                                             <span>Edit Product</span>
                                         </button>
