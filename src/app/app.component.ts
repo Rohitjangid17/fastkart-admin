@@ -56,33 +56,43 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     }, 100); // Adjust the delay if needed
   }
 
-  private initializeSidebarState() {
-    const storedSidebarState = localStorage.getItem('sidebarOpened');
-    const isSmallScreen = window.innerWidth <= 991;
+  private isBrowser(): boolean {
+    return typeof window !== 'undefined' && typeof window.localStorage !== 'undefined';
+  }
 
-    if (isSmallScreen) {
-      this.sidebarMode = 'over';
-      this.sidebarOpened = false; // Hide sidebar for small screens
-    } else {
-      this.sidebarMode = 'side';
-      this.sidebarOpened = storedSidebarState === 'true'; // Restore sidebar state for large screens
+  private initializeSidebarState() {
+    if (this.isBrowser()) {
+      const storedSidebarState = localStorage.getItem('sidebarOpened');
+      const isSmallScreen = window.innerWidth <= 991;
+
+      if (isSmallScreen) {
+        this.sidebarMode = 'over';
+        this.sidebarOpened = false; // Hide sidebar for small screens
+      } else {
+        this.sidebarMode = 'side';
+        this.sidebarOpened = storedSidebarState === 'true'; // Restore sidebar state for large screens
+      }
     }
   }
 
   private updateSidebarState(isSmallScreen: boolean) {
-    if (isSmallScreen) {
-      this.sidebarMode = 'over';
-      this.sidebarOpened = false; // Hide sidebar on small screens
-      localStorage.setItem('sidebarOpened', 'false');
-    } else {
-      this.sidebarMode = 'side';
-      this.sidebarOpened = localStorage.getItem('sidebarOpened') === 'true'; // Restore sidebar state for large screens
+    if (this.isBrowser()) {
+      if (isSmallScreen) {
+        this.sidebarMode = 'over';
+        this.sidebarOpened = false; // Hide sidebar on small screens
+        localStorage.setItem('sidebarOpened', 'false');
+      } else {
+        this.sidebarMode = 'side';
+        this.sidebarOpened = localStorage.getItem('sidebarOpened') === 'true'; // Restore sidebar state for large screens
+      }
     }
   }
 
   sidebarToggler() {
-    this.sidebarOpened = !this.sidebarOpened;
-    localStorage.setItem('sidebarOpened', this.sidebarOpened.toString());
+    if (this.isBrowser()) {
+      this.sidebarOpened = !this.sidebarOpened;
+      localStorage.setItem('sidebarOpened', this.sidebarOpened.toString());
+    }
   }
 
   ngOnDestroy() {

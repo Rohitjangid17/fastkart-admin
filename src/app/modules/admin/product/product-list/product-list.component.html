@@ -1,5 +1,5 @@
 <div class="bg-[#f8f8f8] px-4 h-full overflow-y-auto">
-    <app-page-header [title]="pageTitle" />
+    <app-page-header [title]="pageTitle" [isAction]="isHeaderAction" />
 
     <!-- page sub header start here -->
     <div class="flex items-center justify-between">
@@ -28,71 +28,53 @@
     <!-- products list start here -->
     <ng-container *ngIf="isListview;else gridview">
         <div>
-            <table class="w-full">
+            <table class="w-full mb-8">
                 <thead>
                     <tr>
                         <th class="bg-[#0da487] p-2 text-left text-white text-md text-normal">Image</th>
                         <th class="bg-[#0da487] p-2 text-left text-white text-md text-normal">Product Name</th>
+                        <th class="bg-[#0da487] p-2 text-left text-white text-md text-normal">Description</th>
                         <th class="bg-[#0da487] p-2 text-left text-white text-md text-normal">Category</th>
-                        <th class="bg-[#0da487] p-2 text-left text-white text-md text-normal">Current Qty</th>
                         <th class="bg-[#0da487] p-2 text-left text-white text-md text-normal">Price</th>
-                        <th class="bg-[#0da487] p-2 text-left text-white text-md text-normal">Status</th>
+                        <th class="bg-[#0da487] p-2 text-left text-white text-md text-normal w-28">Status</th>
                         <th class="bg-[#0da487] p-2 text-left text-white text-md text-normal">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td class="p-2 text-left text-[#4a5568] text-md">
-                            <img src="../../../assets/1.png" class="w-16" alt="product image" />
-                        </td>
-                        <td class="p-2 text-left text-[#4a5568] text-md">Tuwer Dal</td>
-                        <td class="p-2 text-left text-[#4a5568] text-md">Dals</td>
-                        <td class="p-2 text-left text-[#4a5568] text-md">23</td>
-                        <td class="p-2 text-left text-[#4a5568] text-md">$95.97</td>
-                        <td class="p-2 text-left text-[#4a5568] text-md">
-                            <span
-                                class="bg-[#e2245426] py-1 px-3 text-sm text-normal rounded-md text-[#e22454]">Pending</span>
-                        </td>
-                        <td class="p-2 text-left text-[#4a5568] text-md">
-                            <div class="flex items-center gap-x-2">
-                                <button>
-                                    <mat-icon class="text-[18px] text-[#747dc6]">remove_red_eye</mat-icon>
-                                </button>
-                                <button>
-                                    <mat-icon class="text-[18px] text-[#4aa4d9]">edit</mat-icon>
-                                </button>
-                                <button>
-                                    <mat-icon class="text-[18px] text-[#ef3f3e]">delete_outline</mat-icon>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="p-2 text-left text-[#4a5568] text-md">
-                            <img src="../../../assets/1.png" class="w-16" alt="product image" />
-                        </td>
-                        <td class="p-2 text-left text-[#4a5568] text-md">Tuwer Dal</td>
-                        <td class="p-2 text-left text-[#4a5568] text-md">Dals</td>
-                        <td class="p-2 text-left text-[#4a5568] text-md">23</td>
-                        <td class="p-2 text-left text-[#4a5568] text-md">$95.97</td>
-                        <td class="p-2 text-left text-[#4a5568] text-md">
-                            <span
-                                class="bg-[#2f873326] py-1 px-3 text-sm text-normal rounded-md text-[#2f8733]">Approved</span>
-                        </td>
-                        <td class="p-2 text-left text-[#4a5568] text-md">
-                            <div class="flex items-center gap-x-2">
-                                <button>
-                                    <mat-icon class="text-[18px] text-[#747dc6]">remove_red_eye</mat-icon>
-                                </button>
-                                <button>
-                                    <mat-icon class="text-[18px] text-[#4aa4d9]">edit</mat-icon>
-                                </button>
-                                <button>
-                                    <mat-icon class="text-[18px] text-[#ef3f3e]">delete_outline</mat-icon>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
+                    <ng-container *ngFor="let product of productList">
+                        <tr>
+                            <td class="p-2 text-left text-[#4a5568] text-md">
+                                <img [src]="product.thumbnail" class="w-16" [alt]="product.title" />
+                            </td>
+                            <td class="p-2 text-left text-[#4a5568] text-md">{{product.title}}</td>
+                            <td class="p-2 text-left text-[#4a5568] text-md">{{product.description}}</td>
+                            <td class="p-2 text-left text-[#4a5568] text-md">{{product.category}}</td>
+                            <td class="p-2 text-left text-[#4a5568] text-md">{{product.price}}</td>
+                            <td class="p-2 text-left text-[#4a5568] text-md w-28">
+                                <ng-container *ngIf="product.availabilityStatus === 'In Stock'; else lowStock">
+                                    <span
+                                        class="bg-[#2f873326] py-1 px-3 text-sm text-normal rounded-md text-[#2f8733]">{{product.availabilityStatus}}</span>
+                                </ng-container>
+                                <ng-template #lowStock>
+                                    <span
+                                        class="bg-[#e2245426] py-1 px-3 text-sm text-normal rounded-md text-[#e22454]">{{product.availabilityStatus}}</span>
+                                </ng-template>
+                            </td>
+                            <td class="p-2 text-left text-[#4a5568] text-md">
+                                <div class="flex items-center gap-x-2">
+                                    <button>
+                                        <mat-icon class="text-[18px] text-[#747dc6]">remove_red_eye</mat-icon>
+                                    </button>
+                                    <button>
+                                        <mat-icon class="text-[18px] text-[#4aa4d9]">edit</mat-icon>
+                                    </button>
+                                    <button>
+                                        <mat-icon class="text-[18px] text-[#ef3f3e]">delete_outline</mat-icon>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-container>
                 </tbody>
             </table>
         </div>

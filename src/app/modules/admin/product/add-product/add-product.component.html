@@ -1,1 +1,21 @@
-<p>add-product works!</p>
+<div class="bg-[#f8f8f8] px-4 h-full overflow-y-auto">
+    <app-page-header [title]="pageTitle" [isAction]="isHeaderAction" />
+
+    <!-- Add product form start here -->
+    <form>
+        <div class="border shadow-sm">
+            <div class="bg-white px-2 py-1 border-b">
+                <h2 class="!mb-0">Basic Details</h2>
+            </div>
+            <div class="px-2 pt-4 pb-2">
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+                    <mat-form-field class="w-full" appearance="outline">
+                        <mat-label>Product Title</mat-label>
+                        <input matInput placeholder="Enter Product Title">
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+    </form>
+    <!-- Add product form end here -->
+</div>
