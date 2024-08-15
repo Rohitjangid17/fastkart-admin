@@ -10,6 +10,7 @@ import { RouterLink } from '@angular/router';
 import { TitleService } from '../../../../shared/services/title.service';
 import { ProductService } from '../product.service';
 import { Product } from '../../../../shared/interfaces/common.type';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-product-list',
@@ -24,7 +25,8 @@ import { Product } from '../../../../shared/interfaces/common.type';
     NgIf,
     NgClass,
     RouterLink,
-    NgFor
+    NgFor,
+    MatCardModule,
   ],
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.scss'
@@ -32,7 +34,7 @@ import { Product } from '../../../../shared/interfaces/common.type';
 export class ProductListComponent implements OnInit {
   pageTitle: string = "Products";
   isHeaderAction: boolean = true;
-  isListview: boolean = true;
+  isListview: boolean = false;
   productList: Product[] = [];
 
   constructor(
