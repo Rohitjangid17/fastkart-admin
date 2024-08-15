@@ -29,7 +29,7 @@
     <ng-container *ngIf="isListview;else gridview">
         <div>
             <ng-container *ngIf="productList.length > 0; else noProducts">
-                <table class="w-full mb-8 shadow">
+                <table class="w-full mb-8 shadow border">
                     <thead>
                         <tr>
                             <th class="bg-[#0da487] p-2 text-left text-white text-md text-normal">Image</th>
@@ -44,21 +44,21 @@
                     <tbody>
                         <ng-container *ngFor="let product of productList">
                             <tr>
-                                <td class="p-2 text-left text-[#4a5568] text-md">
+                                <td class="p-2 text-left text-[#4a5568] text-md border-b">
                                     <img [src]="product.thumbnail" class="w-16" [alt]="product.title" />
                                 </td>
-                                <td class="p-2 text-left text-[#4a5568] text-md">{{product.title}}</td>
-                                <td class="p-2 text-left text-[#4a5568] text-md">{{product.description}}</td>
-                                <td class="p-2 text-left text-[#4a5568] text-md">{{product.category}}</td>
-                                <td class="p-2 text-left text-[#4a5568] text-md">{{product.price}}</td>
-                                <td class="p-2 text-left text-[#4a5568] text-md w-28">
+                                <td class="p-2 text-left text-[#4a5568] text-md border-b">{{product.title}}</td>
+                                <td class="p-2 text-left text-[#4a5568] text-md border-b">{{product.description}}</td>
+                                <td class="p-2 text-left text-[#4a5568] text-md border-b">{{product.category}}</td>
+                                <td class="p-2 text-left text-[#4a5568] text-md border-b">{{product.price}}</td>
+                                <td class="p-2 text-left text-[#4a5568] text-md w-28 border-b">
                                     <span
                                         [ngClass]="product.availabilityStatus === 'Low Stock' ? 'bg-[#e2245426] text-[#e22454]' : 'bg-[#2f873326] text-[#2f8733]'"
                                         class="py-1 px-3 text-sm text-normal rounded-full">
                                         {{product.availabilityStatus}}
                                     </span>
                                 </td>
-                                <td class="p-2 text-left text-[#4a5568] text-md">
+                                <td class="p-2 text-left text-[#4a5568] text-md border-b">
                                     <div class="flex items-center gap-x-2">
                                         <button>
                                             <mat-icon class="text-[18px] text-[#747dc6]">remove_red_eye</mat-icon>
