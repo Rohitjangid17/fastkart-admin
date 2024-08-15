@@ -8,5 +8,8 @@ export const productRoutes: Routes = [
     },
     {
         path: "add-product", component: AddProductComponent
+    },
+    {
+        path: "update-product/:id", component: AddProductComponent
     }
 ]
