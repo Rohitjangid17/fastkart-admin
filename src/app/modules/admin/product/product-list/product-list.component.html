@@ -45,7 +45,12 @@
                         <ng-container *ngFor="let product of productList">
                             <tr>
                                 <td class="p-2 text-left text-[#4a5568] text-md border-b">
-                                    <img [src]="product.thumbnail" class="w-16" [alt]="product.title" />
+                                    <ng-container *ngIf="product.thumbnail; else noImage">
+                                        <img [src]="product.thumbnail" class="w-16" [alt]="product.title" />
+                                    </ng-container>
+                                    <ng-template #noImage>
+                                        <img src="../../../../../assets/no-product.png" class="w-16" alt="no image" />
+                                    </ng-template>
                                 </td>
                                 <td class="p-2 text-left text-[#4a5568] text-md border-b">{{product.title}}</td>
                                 <td class="p-2 text-left text-[#4a5568] text-md border-b">{{product.description}}</td>
@@ -89,11 +94,16 @@
     </ng-container>
     <ng-template #gridview>
         <ng-container *ngIf="productList.length > 0; else noProducts">
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-3">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-3 mb-8">
                 <ng-container *ngFor="let product of productList">
-                    <mat-card class="w-full shadow-md rounded-lg overflow-hidden">
-                        <img mat-card-image [src]="product.thumbnail" [alt]="product.title"
-                            class="w-52 mx-auto object-cover" />
+                    <mat-card class="w-full border shadow-md rounded-lg overflow-hidden">
+                        <ng-container *ngIf="product.thumbnail; else noImage">
+                            <img mat-card-image [src]="product.thumbnail" class="w-52 mx-auto object-cover" [alt]="product.title" />
+                        </ng-container>
+                        <ng-template #noImage>
+                            <img mat-card-image src="../../../../../assets/no-product.png" class="w-52 mx-auto object-cover"
+                                alt="no image" />
+                        </ng-template>
                         <mat-card-content class="p-4">
                             <h2 class="text-xl font-bold text-gray-800">{{ product.title }}</h2>
                             <p class="text-gray-600 mt-2">{{ product.description }}</p>
