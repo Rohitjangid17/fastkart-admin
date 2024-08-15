@@ -3,7 +3,7 @@
 
     <!-- Add product form start here -->
     <div class="h-[450px] overflow-y-auto">
-        <form>
+        <form [formGroup]="addProductForm" (ngSubmit)="addProduct()">
             <div class="grid grid-cols-1 gap-y-4">
                 <!-- Product Information panel start here -->
                 <div class="border shadow-sm">
@@ -15,14 +15,14 @@
                             <!-- product title form field start here -->
                             <mat-form-field class="w-full" appearance="outline">
                                 <mat-label>Product Title</mat-label>
-                                <input matInput placeholder="Enter Product Title">
+                                <input matInput formControlName="title" placeholder="Enter Product Title">
                             </mat-form-field>
                             <!-- product title form field end here -->
 
                             <!-- category form field start here -->
                             <mat-form-field class="w-full" appearance="outline">
                                 <mat-label>Category</mat-label>
-                                <mat-select>
+                                <mat-select formControlName="category">
                                     <ng-container *ngFor="let category of categoryList">
                                         <mat-option [value]="category">{{category | titlecase }}</mat-option>
                                     </ng-container>
@@ -33,7 +33,7 @@
                             <!-- brand form field start here -->
                             <mat-form-field class="w-full" appearance="outline">
                                 <mat-label>Brand</mat-label>
-                                <mat-select>
+                                <mat-select formControlName="brand">
                                     <ng-container *ngFor="let brand of brandList">
                                         <mat-option [value]="brand">{{brand}}</mat-option>
                                     </ng-container>
@@ -44,7 +44,7 @@
                             <!-- Stock Status form field start here -->
                             <mat-form-field class="w-full" appearance="outline">
                                 <mat-label>Stock Status</mat-label>
-                                <mat-select>
+                                <mat-select formControlName="availabilityStatus">
                                     <ng-container *ngFor="let stockStatus of stockStatusList">
                                         <mat-option [value]="stockStatus">{{stockStatus}}</mat-option>
                                     </ng-container>
@@ -55,7 +55,7 @@
                             <!-- Warranty Information form field start here -->
                             <mat-form-field class="w-full" appearance="outline">
                                 <mat-label>Warranty Information</mat-label>
-                                <mat-select>
+                                <mat-select formControlName="warrantyInformation">
                                     <ng-container *ngFor="let warrantyInformation of warrantyInformationList">
                                         <mat-option [value]="warrantyInformation">{{warrantyInformation}}</mat-option>
                                     </ng-container>
@@ -66,7 +66,7 @@
                             <!-- Shipping Information form field start here -->
                             <mat-form-field class="w-full" appearance="outline">
                                 <mat-label>Shipping Information</mat-label>
-                                <mat-select>
+                                <mat-select formControlName="shippingInformation">
                                     <ng-container *ngFor="let shippingInformation of shippingInformationList">
                                         <mat-option [value]="shippingInformation">{{shippingInformation}}</mat-option>
                                     </ng-container>
@@ -77,7 +77,7 @@
                             <!-- Return Policy form field start here -->
                             <mat-form-field class="w-full" appearance="outline">
                                 <mat-label>Return Policy</mat-label>
-                                <mat-select>
+                                <mat-select formControlName="returnPolicy">
                                     <ng-container *ngFor="let returnPolicy of returnPolicyList">
                                         <mat-option [value]="returnPolicy">{{returnPolicy}}</mat-option>
                                     </ng-container>
@@ -88,14 +88,15 @@
                             <!-- Stock form field start here -->
                             <mat-form-field class="w-full" appearance="outline">
                                 <mat-label>Stock</mat-label>
-                                <input matInput placeholder="Enter Product Stock">
+                                <input matInput formControlName="stock" placeholder="Enter Product Stock">
                             </mat-form-field>
                             <!-- Stock form field end here -->
 
                             <!-- Minimum Order Quantity form field start here -->
                             <mat-form-field class="w-full" appearance="outline">
                                 <mat-label>Minimum Order Quantity</mat-label>
-                                <input matInput placeholder="Enter Minimum Order Quantity">
+                                <input matInput formControlName="minimumOrderQuantity"
+                                    placeholder="Enter Minimum Order Quantity">
                             </mat-form-field>
                             <!-- Minimum Order Quantity form field end here -->
                         </div>
@@ -113,7 +114,8 @@
                             <!-- Product Description form field start here -->
                             <mat-form-field class="w-full" appearance="outline">
                                 <mat-label>Product Description</mat-label>
-                                <textarea matInput placeholder="Enter Product Description"></textarea>
+                                <textarea matInput formControlName="description"
+                                    placeholder="Enter Product Description"></textarea>
                             </mat-form-field>
                             <!-- Product Description form field end here -->
                         </div>
@@ -147,14 +149,15 @@
                             <!-- product price form field start here -->
                             <mat-form-field class="w-full" appearance="outline">
                                 <mat-label>Product Price</mat-label>
-                                <input matInput placeholder="Enter Product Price">
+                                <input matInput formControlName="price" placeholder="Enter Product Price">
                             </mat-form-field>
                             <!-- product price form field end here -->
 
                             <!-- product price form field start here -->
                             <mat-form-field class="w-full" appearance="outline">
                                 <mat-label>Product Discount(In %)</mat-label>
-                                <input matInput placeholder="Enter Product Discount(In %)">
+                                <input matInput formControlName="discountPercentage"
+                                    placeholder="Enter Product Discount(In %)">
                             </mat-form-field>
                             <!-- product price form field end here -->
                         </div>
@@ -164,8 +167,8 @@
 
                 <div class="text-end">
                     <button mat-button class="!bg-[#4f966e] !text-white !text-md !px-4"
-                        matTooltip="Save Product"><mat-icon>save</mat-icon>
-                        Save
+                        [disabled]="addProductForm.invalid" matTooltip="Add Product"><mat-icon>save</mat-icon>
+                        Add Product
                     </button>
                 </div>
             </div>

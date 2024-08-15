@@ -18,7 +18,13 @@ export class ProductService {
     return this._httpClient.get<Product[]>(environment.apiUrl + "/api/products");
   }
 
-  deleteProductById = (productId: string) => {
+  // create product
+  createProduct = (product: Product) => {
+    return this._httpClient.post<Product>(environment.apiUrl + "/api/products", product);
+  }
+
+  // delete product by id
+  deleteProductById = (productId: string | undefined) => {
     return this._httpClient.delete<Product>(environment.apiUrl + "/api/products/" + productId);
   }
 }
