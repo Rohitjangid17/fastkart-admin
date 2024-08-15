@@ -73,7 +73,8 @@
                                             <mat-icon>remove_red_eye</mat-icon>
                                             <span>Order Details</span>
                                         </button>
-                                        <button class="!text-[18px]" [routerLink]="'/update-product/' + product._id" mat-menu-item>
+                                        <button class="!text-[18px]" [routerLink]="'/update-product/' + product._id"
+                                            mat-menu-item>
                                             <mat-icon>edit</mat-icon>
                                             <span>Edit Product</span>
                                         </button>
@@ -125,7 +126,7 @@
                                 </span>
                             </mat-card-content>
                             <mat-card-actions class="p-4 flex justify-between">
-                                <button mat-button>
+                                <button [routerLink]="'/update-product/' + product._id" mat-button>
                                     <mat-icon class="text-blue-500">edit</mat-icon>
                                     Edit
                                 </button>

@@ -39,8 +39,14 @@ export class SidebarComponent {
       {
         id: 3,
         title: "Categories",
-        icon: "dashboard",
+        icon: "category",
         path: "/categories"
+      },
+      {
+        id: 8,
+        title: "Orders",
+        icon: "shopping_cart",
+        path: "/products"
       },
       {
         id: 4,
@@ -50,62 +56,56 @@ export class SidebarComponent {
       },
       {
         id: 5,
-        title: "Users",
-        icon: "dashboard",
+        title: "Customers",
+        icon: "supervised_user_circle",
         path: "/products"
       },
-      {
-        id: 6,
-        title: "Roles",
-        icon: "dashboard",
-        path: "/products"
-      },
-      {
-        id: 7,
-        title: "Media",
-        icon: "dashboard",
-        path: "/products"
-      },
-      {
-        id: 8,
-        title: "Orders",
-        icon: "dashboard",
-        path: "/products"
-      },
-      {
-        id: 9,
-        title: "Localization",
-        icon: "dashboard",
-        path: "/products"
-      },
+      // {
+      //   id: 6,
+      //   title: "Roles",
+      //   icon: "dashboard",
+      //   path: "/products"
+      // },
+      // {
+      //   id: 7,
+      //   title: "Media",
+      //   icon: "dashboard",
+      //   path: "/products"
+      // },
+      // {
+      //   id: 9,
+      //   title: "Localization",
+      //   icon: "dashboard",
+      //   path: "/products"
+      // },
       {
         id: 10,
         title: "Coupons",
         icon: "dashboard",
         path: "/products"
       },
-      {
-        id: 11,
-        title: "Tax",
-        icon: "dashboard",
-        path: "/products"
-      },
+      // {
+      //   id: 11,
+      //   title: "Tax",
+      //   icon: "dashboard",
+      //   path: "/products"
+      // },
       {
         id: 12,
         title: "Product Review",
-        icon: "dashboard",
+        icon: "rate_review",
         path: "/products"
       },
       {
         id: 13,
         title: "Support Tickets",
-        icon: "dashboard",
+        icon: "call",
         path: "/products"
       },
       {
         id: 14,
         title: "Settings",
-        icon: "dashboard",
+        icon: "settings",
         path: "/products"
       },
     ]
