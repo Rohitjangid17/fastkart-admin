@@ -29,7 +29,7 @@
     <ng-container *ngIf="isListview;else gridview">
         <div class="h-[360px] overflow-y-auto">
             <ng-container *ngIf="productList.length > 0; else noProducts">
-                <table class="w-full shadow border">
+                <table class="w-full shadow border overflow-x-auto">
                     <thead>
                         <tr>
                             <th class="bg-[#4f966e] p-2 text-left text-white text-md text-normal">Image</th>
