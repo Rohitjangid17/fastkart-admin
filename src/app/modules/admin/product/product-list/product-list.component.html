@@ -1,4 +1,4 @@
-<div class="bg-[#f8f8f8] px-4 h-full overflow-y-auto">
+<div class="bg-[#f8f8f8] px-4">
     <app-page-header [title]="pageTitle" [isAction]="isHeaderAction" />
 
     <!-- page sub header start here -->
@@ -17,7 +17,7 @@
                 <mat-icon class="p-3 !flex items-center justify-center"
                     [ngClass]="{'rounded-[4px] border border-solid border-[#0da487]': isListview}">list</mat-icon>
             </button>
-            <button mat-button class="!bg-[#0da487] !text-white !text-md !px-4" matTooltip="Add Product"
+            <button mat-button class="!bg-[#4f966e] !text-white !text-md !px-4" matTooltip="Add Product"
                 routerLink="/add-product"><mat-icon>add</mat-icon>
                 Add Product
             </button>
@@ -27,18 +27,18 @@
 
     <!-- products list start here -->
     <ng-container *ngIf="isListview;else gridview">
-        <div>
+        <div class="h-[360px] overflow-y-auto">
             <ng-container *ngIf="productList.length > 0; else noProducts">
-                <table class="w-full mb-8 shadow border">
+                <table class="w-full shadow border">
                     <thead>
                         <tr>
-                            <th class="bg-[#0da487] p-2 text-left text-white text-md text-normal">Image</th>
-                            <th class="bg-[#0da487] p-2 text-left text-white text-md text-normal">Product Name</th>
-                            <th class="bg-[#0da487] p-2 text-left text-white text-md text-normal">Description</th>
-                            <th class="bg-[#0da487] p-2 text-left text-white text-md text-normal">Category</th>
-                            <th class="bg-[#0da487] p-2 text-left text-white text-md text-normal">Price</th>
-                            <th class="bg-[#0da487] p-2 text-left text-white text-md text-normal w-28">Status</th>
-                            <th class="bg-[#0da487] p-2 text-left text-white text-md text-normal">Action</th>
+                            <th class="bg-[#4f966e] p-2 text-left text-white text-md text-normal">Image</th>
+                            <th class="bg-[#4f966e] p-2 text-left text-white text-md text-normal">Product Name</th>
+                            <th class="bg-[#4f966e] p-2 text-left text-white text-md text-normal">Description</th>
+                            <th class="bg-[#4f966e] p-2 text-left text-white text-md text-normal">Category</th>
+                            <th class="bg-[#4f966e] p-2 text-left text-white text-md text-normal">Price</th>
+                            <th class="bg-[#4f966e] p-2 text-left text-white text-md text-normal w-28">Status</th>
+                            <th class="bg-[#4f966e] p-2 text-left text-white text-md text-normal">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -64,17 +64,24 @@
                                     </span>
                                 </td>
                                 <td class="p-2 text-left text-[#4a5568] text-md border-b">
-                                    <div class="flex items-center gap-x-2">
-                                        <button>
-                                            <mat-icon class="text-[18px] text-[#747dc6]">remove_red_eye</mat-icon>
+                                    <button mat-icon-button [matMenuTriggerFor]="menu"
+                                        aria-label="Example icon-button with a menu">
+                                        <mat-icon class="!text-[#4a5568]">more_vert</mat-icon>
+                                    </button>
+                                    <mat-menu #menu="matMenu">
+                                        <button class="!text-[18px]" mat-menu-item>
+                                            <mat-icon>remove_red_eye</mat-icon>
+                                            <span>Order Details</span>
                                         </button>
-                                        <button>
-                                            <mat-icon class="text-[18px] text-[#4aa4d9]">edit</mat-icon>
+                                        <button class="!text-[18px]" mat-menu-item>
+                                            <mat-icon>edit</mat-icon>
+                                            <span>Edit Product</span>
                                         </button>
-                                        <button (click)="deleteProduct(product._id)">
-                                            <mat-icon class="text-[18px] text-[#ef3f3e]">delete_outline</mat-icon>
+                                        <button class="!text-[18px]" mat-menu-item (click)="deleteProduct(product._id)">
+                                            <mat-icon>delete_outline</mat-icon>
+                                            <span>Delete Product</span>
                                         </button>
-                                    </div>
+                                    </mat-menu>
                                 </td>
                             </tr>
                         </ng-container>
@@ -84,7 +91,7 @@
             <ng-template #noProducts>
                 <div class="flex flex-col items-center justify-center w-full">
                     <h2>No have Products!</h2>
-                    <button mat-button class="!bg-[#0da487] !text-white !text-md !px-4" matTooltip="Add Product"
+                    <button mat-button class="!bg-[#4f966e] !text-white !text-md !px-4" matTooltip="Add Product"
                         routerLink="/add-product"><mat-icon>add</mat-icon>
                         Add Product
                     </button>
@@ -94,40 +101,42 @@
     </ng-container>
     <ng-template #gridview>
         <ng-container *ngIf="productList.length > 0; else noProducts">
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-3 mb-8">
-                <ng-container *ngFor="let product of productList">
-                    <mat-card class="w-full border shadow-md rounded-lg overflow-hidden">
-                        <ng-container *ngIf="product.thumbnail; else noImage">
-                            <img mat-card-image [src]="product.thumbnail" class="w-52 mx-auto object-cover"
-                                [alt]="product.title" />
-                        </ng-container>
-                        <ng-template #noImage>
-                            <img mat-card-image src="../../../../../assets/no-product.png"
-                                class="w-52 mx-auto object-cover" alt="no image" />
-                        </ng-template>
-                        <mat-card-content class="p-4">
-                            <h2 class="text-xl font-bold text-gray-800">{{ product.title }}</h2>
-                            <p class="text-gray-600 mt-2">{{ product.description }}</p>
-                            <p class="text-gray-800 mt-2 font-medium">Category: {{ product.category }}</p>
-                            <p class="text-gray-800 mt-2 font-medium">Price: {{ product.price }}</p>
-                            <span
-                                [ngClass]="product.availabilityStatus ==='Low Stock' ? 'bg-[#e2245426] text-[#e22454]' : 'bg-[#2f873326] text-[#2f8733]'"
-                                class="py-1 px-3 text-sm text-normal rounded-full">
-                                {{product.availabilityStatus}}
-                            </span>
-                        </mat-card-content>
-                        <mat-card-actions class="p-4 flex justify-between">
-                            <button mat-button color="accent">
-                                <mat-icon class="text-blue-500">edit</mat-icon>
-                                Edit
-                            </button>
-                            <button mat-button color="warn">
-                                <mat-icon class="text-red-500">delete_outline</mat-icon>
-                                Delete
-                            </button>
-                        </mat-card-actions>
-                    </mat-card>
-                </ng-container>
+            <div class="h-[360px] overflow-y-auto">
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-3">
+                    <ng-container *ngFor="let product of productList">
+                        <mat-card class="w-full border shadow-md rounded-lg overflow-hidden">
+                            <ng-container *ngIf="product.thumbnail; else noImage">
+                                <img mat-card-image [src]="product.thumbnail" class="w-52 mx-auto object-cover"
+                                    [alt]="product.title" />
+                            </ng-container>
+                            <ng-template #noImage>
+                                <img mat-card-image src="../../../../../assets/no-product.png"
+                                    class="w-52 mx-auto object-cover" alt="no image" />
+                            </ng-template>
+                            <mat-card-content class="p-4">
+                                <h2 class="text-xl font-bold text-gray-800">{{ product.title }}</h2>
+                                <p class="text-gray-600 mt-2">{{ product.description }}</p>
+                                <p class="text-gray-800 mt-2 font-medium">Category: {{ product.category }}</p>
+                                <p class="text-gray-800 mt-2 font-medium">Price: {{ product.price }}</p>
+                                <span
+                                    [ngClass]="product.availabilityStatus ==='Low Stock' ? 'bg-[#e2245426] text-[#e22454]' : 'bg-[#2f873326] text-[#2f8733]'"
+                                    class="py-1 px-3 text-sm text-normal rounded-full">
+                                    {{product.availabilityStatus}}
+                                </span>
+                            </mat-card-content>
+                            <mat-card-actions class="p-4 flex justify-between">
+                                <button mat-button>
+                                    <mat-icon class="text-blue-500">edit</mat-icon>
+                                    Edit
+                                </button>
+                                <button mat-button (click)="deleteProduct(product._id)">
+                                    <mat-icon class="text-red-500">delete_outline</mat-icon>
+                                    Delete
+                                </button>
+                            </mat-card-actions>
+                        </mat-card>
+                    </ng-container>
+                </div>
             </div>
         </ng-container>
         <ng-template #noProducts>

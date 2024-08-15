@@ -11,6 +11,7 @@ import { TitleService } from '../../../../shared/services/title.service';
 import { ProductService } from '../product.service';
 import { Product } from '../../../../shared/interfaces/common.type';
 import { MatCardModule } from '@angular/material/card';
+import { MatMenuModule } from '@angular/material/menu';
 
 @Component({
   selector: 'app-product-list',
@@ -27,6 +28,7 @@ import { MatCardModule } from '@angular/material/card';
     RouterLink,
     NgFor,
     MatCardModule,
+    MatMenuModule
   ],
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.scss'
@@ -34,7 +36,7 @@ import { MatCardModule } from '@angular/material/card';
 export class ProductListComponent implements OnInit {
   pageTitle: string = "Products";
   isHeaderAction: boolean = true;
-  isListview: boolean = false;
+  isListview: boolean = true;
   productList: Product[] = [];
 
   constructor(
