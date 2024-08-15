@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { PageHeaderComponent } from '../../../../shared/component/page-header/page-header.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -39,13 +39,14 @@ export class ProductListComponent implements OnInit {
 
   constructor(
     private _titleService: TitleService,
-    private _productService: ProductService
+    private _productService: ProductService,
+    private _changeDetectorRef: ChangeDetectorRef
   ) {
     this._titleService.setTitle("Fastkart | Products");
   }
 
   ngOnInit(): void {
-    this.getProduct();
+    this.getProducts();
   }
 
   dataViewToggle = (view: number) => {
@@ -54,10 +55,21 @@ export class ProductListComponent implements OnInit {
   }
 
   // get products
-  getProduct = () => {
+  getProducts = () => {
     this._productService.getProductList().subscribe((products: Product[]) => {
       this.productList = products;
+      this._changeDetectorRef.detectChanges();
       console.log(this.productList);
+    }, (error) => {
+      console.log(error);
+    });
+  }
+
+  // delete product
+  deleteProduct = (productId: string) => {
+    this._productService.deleteProductById(productId).subscribe((product: Product) => {
+      console.log(product);
+      this.getProducts();
     }, (error) => {
       console.log(error);
     });

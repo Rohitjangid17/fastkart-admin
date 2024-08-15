@@ -6,7 +6,7 @@ export interface Navlink {
 }
 
 export interface Product {
-    _id?: string
+    _id: string
     title: string
     description: string
     category: string

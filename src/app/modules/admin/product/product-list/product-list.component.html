@@ -71,7 +71,7 @@
                                         <button>
                                             <mat-icon class="text-[18px] text-[#4aa4d9]">edit</mat-icon>
                                         </button>
-                                        <button>
+                                        <button (click)="deleteProduct(product._id)">
                                             <mat-icon class="text-[18px] text-[#ef3f3e]">delete_outline</mat-icon>
                                         </button>
                                     </div>
@@ -98,11 +98,12 @@
                 <ng-container *ngFor="let product of productList">
                     <mat-card class="w-full border shadow-md rounded-lg overflow-hidden">
                         <ng-container *ngIf="product.thumbnail; else noImage">
-                            <img mat-card-image [src]="product.thumbnail" class="w-52 mx-auto object-cover" [alt]="product.title" />
+                            <img mat-card-image [src]="product.thumbnail" class="w-52 mx-auto object-cover"
+                                [alt]="product.title" />
                         </ng-container>
                         <ng-template #noImage>
-                            <img mat-card-image src="../../../../../assets/no-product.png" class="w-52 mx-auto object-cover"
-                                alt="no image" />
+                            <img mat-card-image src="../../../../../assets/no-product.png"
+                                class="w-52 mx-auto object-cover" alt="no image" />
                         </ng-template>
                         <mat-card-content class="p-4">
                             <h2 class="text-xl font-bold text-gray-800">{{ product.title }}</h2>

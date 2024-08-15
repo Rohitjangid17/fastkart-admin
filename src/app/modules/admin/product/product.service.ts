@@ -17,4 +17,8 @@ export class ProductService {
   getProductList = () => {
     return this._httpClient.get<Product[]>(environment.apiUrl + "/api/products");
   }
+
+  deleteProductById = (productId: string) => {
+    return this._httpClient.delete<Product>(environment.apiUrl + "/api/products/" + productId);
+  }
 }
