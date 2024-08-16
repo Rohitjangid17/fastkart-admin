@@ -77,12 +77,14 @@ export class AddProductComponent implements OnInit {
 
     this.getSingleProductById();
 
-    // Determine the title based on whether productId exists
-    const title = this.productId ? "Update Product" : "Add Product";
-
     // Set the page title and the title in the title service
-    this.pageTitle = title;
-    this._titleService.setTitle(`Fastkart | ${title}`);
+    if (this.productId) {
+      this.pageTitle = "Update Product";
+      this._titleService.setTitle("Fastkart | Update Product");
+    } else {
+      this.pageTitle = "Add Product";
+      this._titleService.setTitle("Fastkart | Update Add");
+    }
   }
 
   // get product list
