@@ -3,7 +3,7 @@
 
     <!-- Add product form start here -->
     <div class="h-[450px] overflow-y-auto">
-        <form [formGroup]="addProductForm" (ngSubmit)="addProduct()">
+        <form [formGroup]="addProductForm">
             <div class="grid grid-cols-1 gap-y-4">
                 <!-- Product Information panel start here -->
                 <div class="border shadow-sm">
@@ -166,10 +166,21 @@
                 <!-- Product Price panel end here -->
 
                 <div class="text-end">
-                    <button mat-button class="!bg-[#4f966e] !text-white !text-md !px-4"
-                        [disabled]="addProductForm.invalid" matTooltip="Add Product"><mat-icon>save</mat-icon>
-                        Add Product
-                    </button>
+                    <ng-container *ngIf="!isProductEdit; else updateProduct">
+                        <button mat-button class="!bg-[#4f966e] !text-white !text-md !px-4" (click)="addProduct()"
+                            [disabled]="addProductForm.invalid" matTooltip="Add Product">
+                            <mat-icon>save</mat-icon>
+                            Add Product
+                        </button>
+                    </ng-container>
+
+                    <ng-template #updateProduct>
+                        <button mat-button class="!bg-[#4f966e] !text-white !text-md !px-4" (click)="updateProductById()"
+                            [disabled]="addProductForm.invalid" matTooltip="Update Product">
+                            <mat-icon>save</mat-icon>
+                            Update Product
+                        </button>
+                    </ng-template>
                 </div>
             </div>
         </form>

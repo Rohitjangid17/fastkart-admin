@@ -27,4 +27,14 @@ export class ProductService {
   deleteProductById = (productId: string | undefined) => {
     return this._httpClient.delete<Product>(environment.apiUrl + "/api/products/" + productId);
   }
+
+  // get single product by id
+  getProductById(productId: string) {
+    return this._httpClient.get<Product>(environment.apiUrl + "/api/products/" + productId);
+  }
+
+  // update product by id
+  updateProductById(productId: string, product: Product) {
+    return this._httpClient.put<Product>(environment.apiUrl + "/api/products/" + productId, product);
+  }
 }

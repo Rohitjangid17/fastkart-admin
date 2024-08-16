@@ -8,10 +8,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { ProductService } from '../product.service';
 import { Product } from '../../../../shared/interfaces/common.type';
-import { NgFor, TitleCasePipe } from '@angular/common';
+import { NgFor, NgIf, TitleCasePipe } from '@angular/common';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-product',
@@ -27,26 +27,30 @@ import { Router } from '@angular/router';
     TitleCasePipe,
     MatSlideToggleModule,
     ReactiveFormsModule,
+    NgIf
   ],
   templateUrl: './add-product.component.html',
   styleUrl: './add-product.component.scss'
 })
 export class AddProductComponent implements OnInit {
-  pageTitle: string = "Add Product";
+  pageTitle: string = "";
   isHeaderAction: boolean = false;
   categoryList: string[] = [];
   brandList: string[] = [];
   stockStatusList: string[] = ["In Stock", "Out Of Stock"]
-  warrantyInformationList: string[] = ["1 Month Warrunty", "2 Months Warrunty", "3 Months Warrunty", "4 Months Warrunty",]
+  warrantyInformationList: string[] = ["1 week warranty", "1 Month Warrunty", "2 Months Warrunty", "3 Months Warrunty", "4 Months Warrunty",]
   shippingInformationList: string[] = ["Ships in 1 month", "Ships in 1-2 business day", "Ships in 3-5 business days", "Ships in 2 weeks", "Ships overnight",]
-  returnPolicyList: string[] = ["30 days return policy", "7 days return policy", "15 days return policy"];
+  returnPolicyList: string[] = ["30 days return policy", "7 days return policy", "15 days return policy", "60 days return policy"];
   addProductForm!: FormGroup;
+  productId: string = "";
+  isProductEdit: boolean = false;
 
   constructor(
     private _titleService: TitleService,
     private _productService: ProductService,
     private _formBuilder: FormBuilder,
-    private _router: Router
+    private _router: Router,
+    private _activatedRoute: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
@@ -69,10 +73,16 @@ export class AddProductComponent implements OnInit {
       // thumbnail: ["", [Validators.required]]
     });
 
-    // set page title
-    this._titleService.setTitle("Fastkart | Add Product");
-
     this.getProductList();
+
+    this.getSingleProductById();
+
+    // Determine the title based on whether productId exists
+    const title = this.productId ? "Update Product" : "Add Product";
+
+    // Set the page title and the title in the title service
+    this.pageTitle = title;
+    this._titleService.setTitle(`Fastkart | ${title}`);
   }
 
   // get product list
@@ -91,7 +101,7 @@ export class AddProductComponent implements OnInit {
 
   // Add Product
   addProduct = () => {
-    const productData = {
+    const productData: Product = {
       title: this.addProductForm.get("title")?.value,
       description: this.addProductForm.get("description")?.value,
       category: this.addProductForm.get("category")?.value,
@@ -119,6 +129,57 @@ export class AddProductComponent implements OnInit {
     }
 
     this._productService.createProduct(productData).subscribe((product: Product) => {
+      this._router.navigate(["/products"]);
+    }, (error) => {
+      console.log(error);
+    });
+  }
+
+  // get single product by id
+  getSingleProductById() {
+    this.productId = this._activatedRoute.snapshot.params["id"];
+    if (this.productId) {
+      this.isProductEdit = true;
+      this._productService.getProductById(this.productId).subscribe((product: Product) => {
+        console.log(product);
+        this.addProductForm.patchValue(product);
+      }, (error) => {
+        console.log(error);
+      });
+    }
+  }
+
+  // Update product 
+  updateProductById() {
+    const productData: Product = {
+      title: this.addProductForm.get("title")?.value,
+      description: this.addProductForm.get("description")?.value,
+      category: this.addProductForm.get("category")?.value,
+      price: +this.addProductForm.get("price")?.value,
+      discountPercentage: +this.addProductForm.get("discountPercentage")?.value,
+      rating: 5,
+      stock: +this.addProductForm.get("stock")?.value,
+      brand: this.addProductForm.get("brand")?.value,
+      warrantyInformation: this.addProductForm.get("warrantyInformation")?.value,
+      shippingInformation: this.addProductForm.get("shippingInformation")?.value,
+      availabilityStatus: this.addProductForm.get("availabilityStatus")?.value,
+      reviews: [
+        {
+          rating: 1,
+          comment: "Disappointing product!",
+          date: "2024-05-23T08:56:21.619Z",
+          reviewerName: "Lincoln Kelly",
+          reviewerEmail: "lincoln.kelly@x.dummyjson.com",
+        }
+      ],
+      returnPolicy: this.addProductForm.get("returnPolicy")?.value,
+      minimumOrderQuantity: +this.addProductForm.get("minimumOrderQuantity")?.value,
+      images: [],
+      thumbnail: "",
+    }
+
+    this._productService.updateProductById(this.productId, productData).subscribe((product: Product) => {
+      alert("Product Updated!!");
       this._router.navigate(["/products"]);
     }, (error) => {
       console.log(error);
