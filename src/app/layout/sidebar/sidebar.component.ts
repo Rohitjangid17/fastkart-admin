@@ -40,7 +40,7 @@ export class SidebarComponent {
         id: 3,
         title: "Categories",
         icon: "category",
-        path: "/categories"
+        path: "/products"
       },
       {
         id: 8,
