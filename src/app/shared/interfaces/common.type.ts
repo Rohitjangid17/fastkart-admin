@@ -34,3 +34,12 @@ export interface Review {
     reviewerEmail: string
     _id?: string
 }
+
+export interface Category {
+    _id: string
+    title: string
+    description: string
+    image: string
+    createdAt: string
+    __v: number
+}
