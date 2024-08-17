@@ -2,6 +2,10 @@ a:hover{
     background: #ffffff17 !important;
 }
 
+a:focus{
+    background: transparent !important;
+}
+
 a.active{
     background-color: #ffffff17 !important;
 }
