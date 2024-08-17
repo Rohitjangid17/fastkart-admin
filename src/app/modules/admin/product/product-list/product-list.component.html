@@ -35,13 +35,18 @@
                     <thead>
                         <tr class="sticky top-0 z-10">
                             <th class="bg-[#4f966e] p-2 font-medium text-left text-white text-md text-normal">Image</th>
-                            <th class="bg-[#4f966e] p-2 font-medium text-left text-white text-md text-normal whitespace-nowrap">
+                            <th
+                                class="bg-[#4f966e] p-2 font-medium text-left text-white text-md text-normal whitespace-nowrap">
                                 Product Name</th>
-                            <th class="bg-[#4f966e] p-2 font-medium text-left text-white text-md text-normal">Description</th>
-                            <th class="bg-[#4f966e] p-2 font-medium text-left text-white text-md text-normal">Category</th>
+                            <th class="bg-[#4f966e] p-2 font-medium text-left text-white text-md text-normal">
+                                Description</th>
+                            <th class="bg-[#4f966e] p-2 font-medium text-left text-white text-md text-normal">Category
+                            </th>
                             <th class="bg-[#4f966e] p-2 font-medium text-left text-white text-md text-normal">Price</th>
-                            <th class="bg-[#4f966e] p-2 font-medium text-left text-white text-md text-normal w-28">Status</th>
-                            <th class="bg-[#4f966e] p-2 font-medium text-left text-white text-md text-normal">Action</th>
+                            <th class="bg-[#4f966e] p-2 font-medium text-left text-white text-md text-normal w-28">
+                                Status</th>
+                            <th class="bg-[#4f966e] p-2 font-medium text-left text-white text-md text-normal">Action
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -108,7 +113,7 @@
             <div class="h-[360px] overflow-y-auto">
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-3">
                     <ng-container *ngFor="let product of productList">
-                        <mat-card class="w-full border shadow-md rounded-lg overflow-hidden">
+                        <mat-card class="w-full border shadow-md rounded-lg material-card">
                             <ng-container *ngIf="product.thumbnail; else noImage">
                                 <img mat-card-image [src]="product.thumbnail" class="w-52 mx-auto object-cover"
                                     [alt]="product.title" />
@@ -128,14 +133,12 @@
                                     {{product.availabilityStatus}}
                                 </span>
                             </mat-card-content>
-                            <mat-card-actions class="p-4 flex justify-between">
-                                <button [routerLink]="'/update-product/' + product._id" mat-button>
+                            <mat-card-actions class="p-4 material-card-action">
+                                <button [routerLink]="'/update-product/' + product._id" mat-icon-button>
                                     <mat-icon class="text-blue-500">edit</mat-icon>
-                                    Edit
                                 </button>
-                                <button mat-button (click)="deleteProduct(product._id)">
+                                <button (click)="deleteProduct(product._id)" mat-icon-button>
                                     <mat-icon class="text-red-500">delete_outline</mat-icon>
-                                    Delete
                                 </button>
                             </mat-card-actions>
                         </mat-card>
