@@ -18,7 +18,7 @@ import { FooterComponent } from './layout/footer/footer.component';
     SidebarComponent,
     MatSidenavModule,
     MatToolbarModule,
-    FooterComponent
+    FooterComponent,    
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']

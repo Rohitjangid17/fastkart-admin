@@ -3,11 +3,13 @@
 
     <!-- page sub header start here -->
     <div class="flex items-center justify-between">
-        <mat-form-field appearance="outline">
-            <mat-label>Search</mat-label>
-            <input matInput placeholder="Search Product">
-            <mat-icon matSuffix>search</mat-icon>
-        </mat-form-field>
+        <div>
+            <mat-form-field appearance="outline">
+                <mat-label>Search</mat-label>
+                <input matInput placeholder="Search Product">
+                <mat-icon matSuffix>search</mat-icon>
+            </mat-form-field>
+        </div>
         <div class="flex items-center gap-x-2">
             <button matTooltip="Grid View" (click)="dataViewToggle(0)">
                 <mat-icon class="p-3 !flex items-center justify-center"
@@ -19,7 +21,7 @@
             </button>
             <button mat-button class="!bg-[#4f966e] !text-white !text-md !px-4" matTooltip="Add Product"
                 routerLink="/add-product"><mat-icon>add</mat-icon>
-                Add Product
+                <span class="hidden sm:block">Add Product</span>
             </button>
         </div>
     </div>
@@ -33,7 +35,8 @@
                     <thead>
                         <tr class="sticky top-0 z-10">
                             <th class="bg-[#4f966e] p-2 text-left text-white text-md text-normal">Image</th>
-                            <th class="bg-[#4f966e] p-2 text-left text-white text-md text-normal">Product Name</th>
+                            <th class="bg-[#4f966e] p-2 text-left text-white text-md text-normal whitespace-nowrap">
+                                Product Name</th>
                             <th class="bg-[#4f966e] p-2 text-left text-white text-md text-normal">Description</th>
                             <th class="bg-[#4f966e] p-2 text-left text-white text-md text-normal">Category</th>
                             <th class="bg-[#4f966e] p-2 text-left text-white text-md text-normal">Price</th>
@@ -56,10 +59,10 @@
                                 <td class="p-2 text-left text-[#4a5568] text-md border-b">{{product.description}}</td>
                                 <td class="p-2 text-left text-[#4a5568] text-md border-b">{{product.category}}</td>
                                 <td class="p-2 text-left text-[#4a5568] text-md border-b">{{product.price}}</td>
-                                <td class="p-2 text-left text-[#4a5568] text-md w-28 border-b">
+                                <td class="p-2 text-left text-[#4a5568] text-md w-28 border-b whitespace-nowrap">
                                     <span
                                         [ngClass]="product.availabilityStatus === 'Low Stock' ? 'bg-[#e2245426] text-[#e22454]' : 'bg-[#2f873326] text-[#2f8733]'"
-                                        class="py-1 px-3 text-sm text-normal rounded-full">
+                                        class="py-1 px-3 text-xs text-normal rounded-full">
                                         {{product.availabilityStatus}}
                                     </span>
                                 </td>
@@ -121,7 +124,7 @@
                                 <p class="text-gray-800 mt-2 font-medium">Price: {{ product.price }}</p>
                                 <span
                                     [ngClass]="product.availabilityStatus ==='Low Stock' ? 'bg-[#e2245426] text-[#e22454]' : 'bg-[#2f873326] text-[#2f8733]'"
-                                    class="py-1 px-3 text-sm text-normal rounded-full">
+                                    class="py-1 px-3 text-xs text-normal rounded-full">
                                     {{product.availabilityStatus}}
                                 </span>
                             </mat-card-content>

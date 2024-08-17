@@ -40,25 +40,25 @@ export class SidebarComponent {
         id: 3,
         title: "Categories",
         icon: "category",
-        path: "/products"
+        path: "/categories"
       },
       {
         id: 8,
         title: "Orders",
         icon: "shopping_cart",
-        path: "/products"
+        path: "/orders"
       },
-      {
-        id: 4,
-        title: "Attributes",
-        icon: "dashboard",
-        path: "/products"
-      },
+      // {
+      //   id: 4,
+      //   title: "Attributes",
+      //   icon: "dashboard",
+      //   path: "/products"
+      // },
       {
         id: 5,
         title: "Customers",
         icon: "supervised_user_circle",
-        path: "/products"
+        path: "/customers"
       },
       // {
       //   id: 6,
@@ -78,12 +78,12 @@ export class SidebarComponent {
       //   icon: "dashboard",
       //   path: "/products"
       // },
-      {
-        id: 10,
-        title: "Coupons",
-        icon: "dashboard",
-        path: "/products"
-      },
+      // {
+      //   id: 10,
+      //   title: "Coupons",
+      //   icon: "dashboard",
+      //   path: "/products"
+      // },
       // {
       //   id: 11,
       //   title: "Tax",
@@ -94,19 +94,19 @@ export class SidebarComponent {
         id: 12,
         title: "Product Review",
         icon: "rate_review",
-        path: "/products"
+        path: "/product-review"
       },
-      {
-        id: 13,
-        title: "Support Tickets",
-        icon: "call",
-        path: "/products"
-      },
+      // {
+      //   id: 13,
+      //   title: "Support Tickets",
+      //   icon: "call",
+      //   path: "/products"
+      // },
       {
         id: 14,
         title: "Settings",
         icon: "settings",
-        path: "/products"
+        path: "/settings"
       },
     ]
   }

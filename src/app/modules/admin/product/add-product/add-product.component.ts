@@ -12,6 +12,7 @@ import { NgFor, NgIf, TitleCasePipe } from '@angular/common';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-product',
@@ -27,7 +28,8 @@ import { ActivatedRoute, Router } from '@angular/router';
     TitleCasePipe,
     MatSlideToggleModule,
     ReactiveFormsModule,
-    NgIf
+    NgIf,
+    // ToastrModule
   ],
   templateUrl: './add-product.component.html',
   styleUrl: './add-product.component.scss'
@@ -51,6 +53,7 @@ export class AddProductComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private _router: Router,
     private _activatedRoute: ActivatedRoute,
+    private _toastrService: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -131,8 +134,12 @@ export class AddProductComponent implements OnInit {
     }
 
     this._productService.createProduct(productData).subscribe((product: Product) => {
-      this._router.navigate(["/products"]);
+      this._toastrService.success("Product Created Succesfully");
+      setTimeout(() => {
+        this._router.navigate(["/products"]);
+      }, 2000);
     }, (error) => {
+      this._toastrService.error(error);
       console.log(error);
     });
   }
