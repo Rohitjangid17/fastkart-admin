@@ -4,7 +4,7 @@
     <ul class="mt-8">
         <ng-container *ngFor="let navlink of navlinkList">
             <li>
-                <a mat-list-item [routerLink]="navlink.path" [matTooltip]="navlink.title"
+                <a mat-list-item [routerLink]="navlink.path" [routerLinkActive]="navlink.path ? 'active': ''" [matTooltip]="navlink.title"
                     class="menu-link flex items-center text-lg">
                     <mat-icon class="!text-white">{{navlink.icon}}</mat-icon>
                     <span class="!text-white ml-3 -mt-5">{{navlink.title}}</span>

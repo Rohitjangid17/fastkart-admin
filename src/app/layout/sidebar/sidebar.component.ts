@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { Navlink } from '../../shared/interfaces/common.type';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { NgFor } from '@angular/common';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
@@ -15,6 +15,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     RouterLink,
     NgFor,
     MatTooltipModule,
+    RouterLinkActive
   ],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss'
