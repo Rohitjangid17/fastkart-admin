@@ -37,7 +37,7 @@ import { MatCardModule } from '@angular/material/card';
 export class CategoryListComponent implements OnInit {
   pageTitle: string = "Category";
   isHeaderAction: boolean = true;
-  isListview: boolean = false;
+  isListview: boolean = true;
   categoryList: Category[] = [];
 
   constructor(

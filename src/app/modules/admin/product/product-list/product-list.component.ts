@@ -76,4 +76,12 @@ export class ProductListComponent implements OnInit {
       console.log(error);
     });
   }
+
+  // share product on social media
+  shareProduct = (product: Product) => {
+    const pageUrl: string = window.location.href;
+    console.log(pageUrl);
+    const whatsappUrl: string = `https://api.whatsapp.com/send?text=Check%20out%20this%20product:%20${encodeURIComponent(product.title)}%0A${encodeURIComponent(product.description)}%0APrice:%20${encodeURIComponent(product.price)}%0ACategory:%20${encodeURIComponent(product.category)}%0A%0AMore%20details:%20${encodeURIComponent(pageUrl)}`;
+    window.open(whatsappUrl, '_blank');
+  }
 }
