@@ -34,10 +34,13 @@
                     <thead>
                         <tr class="sticky top-0 z-10">
                             <th class="bg-[#4f966e] p-2 text-left font-medium text-white text-md text-normal">Image</th>
-                            <th class="bg-[#4f966e] p-2 text-left font-medium text-white text-md text-normal whitespace-nowrap">
+                            <th
+                                class="bg-[#4f966e] p-2 text-left font-medium text-white text-md text-normal whitespace-nowrap">
                                 Category Name</th>
-                            <th class="bg-[#4f966e] p-2 text-left font-medium text-white text-md text-normal">Description</th>
-                            <th class="bg-[#4f966e] p-2 text-left font-medium text-white text-md text-normal">Action</th>
+                            <th class="bg-[#4f966e] p-2 text-left font-medium text-white text-md text-normal">
+                                Description</th>
+                            <th class="bg-[#4f966e] p-2 text-left font-medium text-white text-md text-normal">Action
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -87,45 +90,36 @@
         </div>
     </ng-container>
     <ng-template #gridview>
-        <!-- <ng-container *ngIf="productList.length > 0; else noProducts">
+        <ng-container *ngIf="categoryList.length > 0; else noProducts">
             <div class="h-[360px] overflow-y-auto">
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-3">
-                    <ng-container *ngFor="let product of productList">
-                        <mat-card class="w-full border shadow-md rounded-lg overflow-hidden">
-                            <ng-container *ngIf="product.thumbnail; else noImage">
-                                <img mat-card-image [src]="product.thumbnail" class="w-52 mx-auto object-cover"
-                                    [alt]="product.title" />
+                    <ng-container *ngFor="let category of categoryList">
+                        <mat-card class="w-full border shadow-md rounded-lg material-card">
+                            <ng-container *ngIf="category.image; else noImage">
+                                <img mat-card-image [src]="category.image" class="w-52 mx-auto object-cover"
+                                    [alt]="category.title" />
                             </ng-container>
                             <ng-template #noImage>
                                 <img mat-card-image src="../../../../../assets/no-product.png"
                                     class="w-52 mx-auto object-cover" alt="no image" />
                             </ng-template>
                             <mat-card-content class="p-4">
-                                <h2 class="text-xl font-bold text-gray-800">{{ product.title }}</h2>
-                                <p class="text-gray-600 mt-2">{{ product.description }}</p>
-                                <p class="text-gray-800 mt-2 font-medium">Category: {{ product.category }}</p>
-                                <p class="text-gray-800 mt-2 font-medium">Price: {{ product.price }}</p>
-                                <span
-                                    [ngClass]="product.availabilityStatus ==='Low Stock' ? 'bg-[#e2245426] text-[#e22454]' : 'bg-[#2f873326] text-[#2f8733]'"
-                                    class="py-1 px-3 text-xs text-normal rounded-full">
-                                    {{product.availabilityStatus}}
-                                </span>
+                                <h2 class="text-xl font-bold text-gray-800">{{ category.title }}</h2>
+                                <p class="text-gray-600 mt-2">{{ category.description }}</p>
                             </mat-card-content>
-                            <mat-card-actions class="p-4 flex justify-between">
-                                <button [routerLink]="'/update-product/' + product._id" mat-button>
+                            <mat-card-actions class="p-4 material-card-action">
+                                <button mat-icon-button>
                                     <mat-icon class="text-blue-500">edit</mat-icon>
-                                    Edit
                                 </button>
-                                <button mat-button (click)="deleteProduct(product._id)">
+                                <button mat-icon-button>
                                     <mat-icon class="text-red-500">delete_outline</mat-icon>
-                                    Delete
                                 </button>
                             </mat-card-actions>
                         </mat-card>
                     </ng-container>
                 </div>
             </div>
-        </ng-container> -->
+        </ng-container>
         <ng-template #noProducts>
             <div class="flex flex-col items-center justify-center w-full">
                 <h2>No have Categories!</h2>

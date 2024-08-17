@@ -12,6 +12,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { TitleService } from '../../../../shared/services/title.service';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { AddNewCategoryDialogComponent } from '../../../../shared/models/add-new-category-dialog/add-new-category-dialog.component';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-category-list',
@@ -27,7 +28,8 @@ import { AddNewCategoryDialogComponent } from '../../../../shared/models/add-new
     NgIf,
     NgFor,
     MatMenuModule,
-    MatDialogModule
+    MatDialogModule,
+    MatCardModule
   ],
   templateUrl: './category-list.component.html',
   styleUrl: './category-list.component.scss'
@@ -35,7 +37,7 @@ import { AddNewCategoryDialogComponent } from '../../../../shared/models/add-new
 export class CategoryListComponent implements OnInit {
   pageTitle: string = "Category";
   isHeaderAction: boolean = true;
-  isListview: boolean = true;
+  isListview: boolean = false;
   categoryList: Category[] = [];
 
   constructor(
