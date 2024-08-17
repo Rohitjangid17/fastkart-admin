@@ -20,6 +20,7 @@ export class AddNewCategoryDialogComponent {
 
   // add category dialog close
   addCategoryDialogClose = () => {
+    console.log("save category button click!!!");
     return this._dialogRef.close();
   }
 
