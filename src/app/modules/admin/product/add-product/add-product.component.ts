@@ -86,7 +86,7 @@ export class AddProductComponent implements OnInit {
       this._titleService.setTitle("Fastkart | Update Product");
     } else {
       this.pageTitle = "Add Product";
-      this._titleService.setTitle("Fastkart | Update Product");
+      this._titleService.setTitle("Fastkart | Add Product");
     }
   }
 
