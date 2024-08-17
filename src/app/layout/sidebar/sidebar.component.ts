@@ -31,6 +31,12 @@ export class SidebarComponent {
         path: "/dashboard"
       },
       {
+        id: 8,
+        title: "Orders",
+        icon: "shopping_cart",
+        path: "/orders"
+      },
+      {
         id: 2,
         title: "Products",
         icon: "dashboard",
@@ -41,12 +47,6 @@ export class SidebarComponent {
         title: "Categories",
         icon: "category",
         path: "/categories"
-      },
-      {
-        id: 8,
-        title: "Orders",
-        icon: "shopping_cart",
-        path: "/orders"
       },
       // {
       //   id: 4,
