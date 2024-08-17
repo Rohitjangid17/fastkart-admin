@@ -1,9 +1,40 @@
-<h1 mat-dialog-title>Category Details</h1>
-<div mat-dialog-content>
-    <p>Details about the category will go here.</p>
-    <!-- Add form or content for editing the category here -->
+<div class="px-4 py-3 flex items-center justify-between bg-[#4f966e]">
+    <h1 class="!text-xl !mb-0 !m-0 text-white font-semibold">Add New Category</h1>
+    <button mat-icon-button (click)="addCategoryDialogClose()" aria-label="Close dialog"
+        class="!text-white !w-auto !h-auto !px-2 !py-2">
+        <mat-icon>close</mat-icon>
+    </button>
 </div>
-<div mat-dialog-actions>
-    <button mat-button (click)="onNoClick()">Cancel</button>
-    <button mat-button (click)="onSave()">Save</button>
+
+<form class="p-4">
+    <div mat-dialog-content>
+        <div class="flex flex-auto items-center mt-2 mb-5">
+            <!-- <div class="flex flex-row flex-wrap gap-2"> -->
+            <div class="relative w-24 h-24 overflow-hidden">
+                <!-- Upload / Remove avatar -->
+                <div class="absolute inset-0 file-upload-button z-10"></div>
+                <div class="absolute inset-0 flex items-center justify-center z-20 image-box-card">
+                    <!-- <ng-container *ngIf="image; else elseNotImage"> -->
+                    <div class="hide">
+                        <img class="image-content"
+                            [src]="'https://cdn.dummyjson.com/products/images/fragrances/Gucci%20Bloom%20Eau%20de/1.png'"
+                            alt="collection">
+                        <mat-icon class="text-red-600 top-1 right-1 absolute cursor-pointer delete-mat-icon"
+                            (click)="removeCollectionImage()">
+                            delete_outline
+                        </mat-icon>
+                    </div>
+                    <!-- </ng-container> -->
+                    <ng-template #elseNotImage>
+                        <mat-icon (click)="compressImage()" class="text-secondary cursor-pointer">camera_alt</mat-icon>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+<div mat-dialog-actions class="flex justify-end p-4 border-t border-gray-200">
+    <button mat-button (click)="addCategoryDialogClose()" class="mr-2 text-gray-600 hover:text-gray-900">Cancel</button>
+    <button mat-button (click)="onSave()" type="button" class="!bg-[#4f966e] !text-white !text-md !px-4">Save</button>
 </div>

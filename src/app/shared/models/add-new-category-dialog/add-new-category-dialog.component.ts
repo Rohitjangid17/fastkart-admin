@@ -1,22 +1,38 @@
 import { Component } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { MatDialogRef } from '@angular/material/dialog';
+import { MatIcon, MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-add-new-category-dialog',
   standalone: true,
-  imports: [],
+  imports: [
+    MatIconModule,
+    MatButtonModule
+  ],
   templateUrl: './add-new-category-dialog.component.html',
   styleUrl: './add-new-category-dialog.component.scss'
 })
 export class AddNewCategoryDialogComponent {
-  constructor(public dialogRef: MatDialogRef<AddNewCategoryDialogComponent>) { }
+  constructor(
+    public _dialogRef: MatDialogRef<AddNewCategoryDialogComponent>
+  ) { }
 
-  onNoClick(): void {
-    this.dialogRef.close();
+  // add category dialog close
+  addCategoryDialogClose = () => {
+    return this._dialogRef.close();
   }
 
-  onSave(): void {
-    // Save logic here
-    this.dialogRef.close();
+  // 
+  onSave = () => {
+    return this._dialogRef.close();
+  }
+
+  removeCollectionImage = () => {
+
+  }
+
+  compressImage = () => {
+
   }
 }
