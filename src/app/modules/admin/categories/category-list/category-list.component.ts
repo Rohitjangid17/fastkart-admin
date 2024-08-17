@@ -68,7 +68,7 @@ export class CategoryListComponent implements OnInit {
     console.log("tess");
 
     const dialogRef = this.dialog.open(AddNewCategoryDialogComponent, {
-      width: '250px',
+      width: "500px",
       data: { /* pass data if needed */ }
     });
 
