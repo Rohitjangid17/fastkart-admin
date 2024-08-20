@@ -81,9 +81,7 @@ export class CategoryListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((category: Category) => {
       if (category) {
-        alert("wdfs");
-        console.log('The dialog was closed with a new category:', category);
-        this.getCategoryList(); // Refresh the category list
+        this.getCategoryList();
       } else {
         console.log('The dialog was closed without adding a new category.');
       }
