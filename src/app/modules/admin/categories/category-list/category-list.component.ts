@@ -69,6 +69,7 @@ export class CategoryListComponent implements OnInit {
       this.categoryList = categories;
       console.log(this.categoryList);
       this._changeDetectorRef.detectChanges();
+      
     });
   }
 
