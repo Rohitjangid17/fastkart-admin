@@ -36,10 +36,10 @@ export interface Review {
 }
 
 export interface Category {
-    _id: string
+    _id?: string
     title: string
     description: string
     image: string
-    createdAt: string
-    __v: number
+    createdAt?: string
+    __v?: number
 }

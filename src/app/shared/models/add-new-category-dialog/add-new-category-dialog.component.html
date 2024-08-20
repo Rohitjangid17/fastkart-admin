@@ -6,7 +6,7 @@
     </button>
 </div>
 
-<form class="p-4">
+<form class="p-4" [formGroup]="addCategoryForm">
     <div mat-dialog-content>
         <div class="flex flex-auto items-center mt-2 mb-5">
             <!-- <div class="flex flex-row flex-wrap gap-2"> -->
@@ -14,23 +14,35 @@
                 <!-- Upload / Remove avatar -->
                 <div class="absolute inset-0 file-upload-button z-10"></div>
                 <div class="absolute inset-0 flex items-center justify-center z-20 image-box-card">
-                    <!-- <ng-container *ngIf="image; else elseNotImage"> -->
-                    <div class="hide">
-                        <img class="image-content"
-                            [src]="'https://cdn.dummyjson.com/products/images/fragrances/Gucci%20Bloom%20Eau%20de/1.png'"
-                            alt="collection">
-                        <mat-icon class="text-red-600 top-1 right-1 absolute cursor-pointer delete-mat-icon"
-                            (click)="removeCollectionImage()">
-                            delete_outline
-                        </mat-icon>
-                    </div>
-                    <!-- </ng-container> -->
+                    <ng-container *ngIf="image; else elseNotImage">
+                        <div class="hide">
+                            <img class="image-content" [src]="image" alt="collection">
+                            <mat-icon class="text-red-600 top-1 right-1 absolute cursor-pointer delete-mat-icon"
+                                (click)="removeCollectionImage()">
+                                delete_outline
+                            </mat-icon>
+                        </div>
+                    </ng-container>
                     <ng-template #elseNotImage>
                         <mat-icon (click)="compressImage()" class="text-secondary cursor-pointer">camera_alt</mat-icon>
                     </ng-template>
                 </div>
             </div>
         </div>
+
+        <!-- category title form field start here -->
+        <mat-form-field class="w-full" appearance="outline">
+            <mat-label>Title</mat-label>
+            <input matInput formControlName="title" placeholder="Enter Category Title">
+        </mat-form-field>
+        <!-- category title form field end here -->
+
+        <!-- category description form field start here -->
+        <mat-form-field class="w-full" appearance="outline">
+            <mat-label>Description</mat-label>
+            <input matInput formControlName="description" placeholder="Enter Category Description">
+        </mat-form-field>
+        <!-- category description form field end here -->
     </div>
 
 </form>

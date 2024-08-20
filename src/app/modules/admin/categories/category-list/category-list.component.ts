@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CategoriesService } from '../categories.service';
 import { Category } from '../../../../shared/interfaces/common.type';
 import { PageHeaderComponent } from '../../../../shared/component/page-header/page-header.component';
@@ -43,7 +43,8 @@ export class CategoryListComponent implements OnInit {
   constructor(
     private _titleService: TitleService,
     private _categoriesService: CategoriesService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public _changeDetectorRef: ChangeDetectorRef
   ) {
     this._titleService.setTitle("Fastkart | Categories");
   }
@@ -51,6 +52,11 @@ export class CategoryListComponent implements OnInit {
   ngOnInit(): void {
     this.getCategoryList();
   }
+
+  // dataViewToggle = (view: number) => {
+  //   localStorage.setItem("view", String(view));
+  //   this.isListview = view === 1;
+  // }
 
   dataViewToggle = (view: number) => {
     localStorage.setItem("view", String(view));
@@ -62,21 +68,25 @@ export class CategoryListComponent implements OnInit {
     this._categoriesService.getAllCategories().subscribe((categories: Category[]) => {
       this.categoryList = categories;
       console.log(this.categoryList);
+      this._changeDetectorRef.detectChanges();
     });
   }
 
   // add new category
   addNewCategory = () => {
-    console.log("tess");
-
     const dialogRef = this.dialog.open(AddNewCategoryDialogComponent, {
       width: "500px",
-      data: { /* pass data if needed */ }
+      data: ""
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      // Handle result if needed
+    dialogRef.afterClosed().subscribe((category: Category) => {
+      if (category) {
+        alert("wdfs");
+        console.log('The dialog was closed with a new category:', category);
+        this.getCategoryList(); // Refresh the category list
+      } else {
+        console.log('The dialog was closed without adding a new category.');
+      }
     });
   }
 }

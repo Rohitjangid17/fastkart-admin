@@ -1,22 +1,48 @@
-import { Component } from '@angular/core';
+import { NgIf } from '@angular/common';
+import { ChangeDetectorRef, Component } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogRef } from '@angular/material/dialog';
-import { MatIcon, MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { CustomImageCompressService } from '../../services/custom-image-compress.service';
+import { CategoriesService } from '../../../modules/admin/categories/categories.service';
+import { Category } from '../../interfaces/common.type';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-new-category-dialog',
   standalone: true,
   imports: [
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    NgIf,
+    ToastrModule
   ],
   templateUrl: './add-new-category-dialog.component.html',
   styleUrl: './add-new-category-dialog.component.scss'
 })
 export class AddNewCategoryDialogComponent {
+  addCategoryForm!: FormGroup;
+  image: string = "";
+
   constructor(
-    public _dialogRef: MatDialogRef<AddNewCategoryDialogComponent>
-  ) { }
+    public _dialogRef: MatDialogRef<AddNewCategoryDialogComponent>,
+    private _formBuilder: FormBuilder,
+    private customImageCompressService: CustomImageCompressService,
+    private _changeDetectorRef: ChangeDetectorRef,
+    private _categoryService: CategoriesService,
+    private _toastrService: ToastrService
+  ) {
+    this.addCategoryForm = this._formBuilder.group({
+      title: ["", [Validators.required, Validators.maxLength(100)]],
+      description: ["", [Validators.required, Validators.maxLength(500)]],
+    });
+  }
 
   // add category dialog close
   addCategoryDialogClose = () => {
@@ -24,16 +50,42 @@ export class AddNewCategoryDialogComponent {
     return this._dialogRef.close();
   }
 
-  // 
+  // Save category
   onSave = () => {
-    return this._dialogRef.close();
+    const category: Category = {
+      title: this.addCategoryForm.get("title")?.value,
+      description: this.addCategoryForm.get("description")?.value,
+      image: this.image,
+    }
+
+    // Send category data to the server
+    this._categoryService.createNewCategory(category).subscribe({
+      next: () => {
+        this._dialogRef.close(category);
+        this._changeDetectorRef.detectChanges();
+        this._toastrService.success('Category added successfully!', 'Success'); 
+      },
+      error: (error: any) => {
+        console.error('Error adding category:', error.message);
+      }
+    });
   }
 
+  // Remove image
   removeCollectionImage = () => {
-
+    this.image = "";
+    this._changeDetectorRef.detectChanges();
   }
 
+  // Compress image
   compressImage = () => {
-
+    this.customImageCompressService.compressFile()
+      .then((uploadResponse) => {
+        this.image = uploadResponse.image;
+        this._changeDetectorRef.detectChanges();
+      })
+      .catch(error => {
+        console.error('Error compressing image:', error.message);
+      });
   }
 }
