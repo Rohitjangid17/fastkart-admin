@@ -90,6 +90,22 @@ export class CategoryListComponent implements OnInit {
     });
   }
 
+  // update category by id
+  updateCategory = (categoryId: string | undefined) => {
+    const dialogRef = this.dialog.open(AddNewCategoryDialogComponent, {
+      width: "500px",
+      data: ""
+    });
+
+    dialogRef.afterClosed().subscribe((category: Category) => {
+      if (category) {
+        this.getCategoryList();
+      } else {
+        console.log('The dialog was closed without updating category.');
+      }
+    });
+  }
+
   // delete category by id
   deleteCategory = (categoryId: string | undefined) => {
     this._categoriesService.deleteCategoryById(categoryId).subscribe((category: Category) => {

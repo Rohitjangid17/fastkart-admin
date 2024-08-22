@@ -63,7 +63,8 @@
                                         <mat-icon class="!text-[#4a5568]">more_vert</mat-icon>
                                     </button>
                                     <mat-menu #menu="matMenu">
-                                        <button class="!text-[18px]" mat-menu-item>
+                                        <button (click)="updateCategory(category._id)" class="!text-[18px]"
+                                            mat-menu-item>
                                             <mat-icon>edit</mat-icon>
                                             <span>Edit Category</span>
                                         </button>
