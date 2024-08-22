@@ -1,8 +1,8 @@
 import { NgIf } from '@angular/common';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -40,7 +40,8 @@ export class AddNewCategoryDialogComponent implements OnInit {
     private _changeDetectorRef: ChangeDetectorRef,
     private _categoryService: CategoriesService,
     private _toastrService: ToastrService,
-    private _activatedRoute: ActivatedRoute
+    private _activatedRoute: ActivatedRoute,
+    @Inject(MAT_DIALOG_DATA) public data: { categoryId: string }
   ) {
     this.addCategoryForm = this._formBuilder.group({
       title: ["", [Validators.required, Validators.maxLength(100)]],
@@ -49,7 +50,20 @@ export class AddNewCategoryDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getCategory();
+    if (this.data.categoryId) {
+      this.isCategoryEdit = true;
+      this.getCategory();
+    }
+  }
+
+  // get single category
+  getCategory = () => {
+    this._categoryService.getCategoryById(this.data.categoryId).subscribe((category: Category) => {
+      this.addCategoryForm.patchValue(category);
+      this.image = category.image || '';
+    }, (error) => {
+      console.log(error);
+    });
   }
 
   // add category dialog close
@@ -97,21 +111,6 @@ export class AddNewCategoryDialogComponent implements OnInit {
       });
   }
 
-  // get single category
-  getCategory = () => {
-    this.categoryId = this._activatedRoute.snapshot.params["id"];
-
-    if (this.categoryId) {
-      this.isCategoryEdit = true;
-      this._categoryService.getCategoryById(this.categoryId).subscribe((category: Category) => {
-        console.log(category);
-        this.addCategoryForm.patchValue(category);
-      }, (error) => {
-        console.log(error);
-      });
-    }
-  }
-
   // update category
   updateCategoryById = () => {
     const category: Category = {
@@ -120,10 +119,11 @@ export class AddNewCategoryDialogComponent implements OnInit {
       image: this.image,
     }
 
-    this._categoryService.updateCategoryById("2", category).subscribe(category => {
-      this._dialogRef.close(category);
-      this._changeDetectorRef.detectChanges();
-      this._toastrService.success("Category updated successfully");
-    })
+    this._categoryService.updateCategoryById(this.data.categoryId, category).subscribe((updatedCategory: Category) => {
+      this._dialogRef.close(updatedCategory);
+      this._toastrService.success('Category updated successfully!', 'Success');
+    }, (error) => {
+      console.error('Error updating category:', error.message);
+    });
   }
 }

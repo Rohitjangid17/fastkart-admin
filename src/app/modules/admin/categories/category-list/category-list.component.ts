@@ -93,8 +93,8 @@ export class CategoryListComponent implements OnInit {
   // update category by id
   updateCategory = (categoryId: string | undefined) => {
     const dialogRef = this.dialog.open(AddNewCategoryDialogComponent, {
-      width: "500px",
-      data: ""
+      width: '500px',
+      data: { categoryId }
     });
 
     dialogRef.afterClosed().subscribe((category: Category) => {
