@@ -61,6 +61,6 @@
     </ng-container>
     <ng-template #updateCategory>
         <button mat-button (click)="updateCategoryById()" type="button"
-            class="!bg-[#4f966e] !text-white !text-md !px-4">Update Category</button>
+            class="!bg-[#4f966e] !text-white !text-md !px-4" [disabled]="addCategoryForm.invalid">Update Category</button>
     </ng-template>
 </div>
