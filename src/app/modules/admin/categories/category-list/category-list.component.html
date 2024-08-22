@@ -125,8 +125,8 @@
         <ng-template #noProducts>
             <div class="flex flex-col items-center justify-center w-full">
                 <h2>No have Categories!</h2>
-                <button mat-button class="!bg-[#0da487] !text-white !text-md !px-4"
-                    matTooltip="Add Product"><mat-icon>add</mat-icon>
+                <button mat-button class="!bg-[#4f966e] !text-white !text-md !px-4" (click)="addNewCategory()"
+                    matTooltip="Add Category"><mat-icon>add</mat-icon>
                     Add Category
                 </button>
             </div>
