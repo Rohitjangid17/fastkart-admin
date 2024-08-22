@@ -110,10 +110,10 @@
                                 <p class="text-gray-600 mt-2">{{ category.description }}</p>
                             </mat-card-content>
                             <mat-card-actions class="p-4 material-card-action">
-                                <button mat-icon-button>
+                                <button (click)="updateCategory(category._id)" mat-icon-button>
                                     <mat-icon class="text-blue-500">edit</mat-icon>
                                 </button>
-                                <button mat-icon-button>
+                                <button (click)="deleteCategory(category._id)" mat-icon-button>
                                     <mat-icon class="text-red-500">delete_outline</mat-icon>
                                 </button>
                             </mat-card-actions>
