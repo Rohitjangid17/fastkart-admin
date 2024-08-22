@@ -21,4 +21,9 @@ export class CategoriesService {
   getAllCategories = () => {
     return this._httpClient.get<Category[]>(environment.apiUrl + "/api/categories");
   }
+
+  // delete category
+  deleteCategoryById = (categoryId: string | undefined) => {
+    return this._httpClient.delete<Category>(environment.apiUrl + "/api/categories/" + categoryId);
+  }
 }

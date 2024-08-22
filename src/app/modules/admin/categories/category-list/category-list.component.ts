@@ -13,6 +13,7 @@ import { TitleService } from '../../../../shared/services/title.service';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { AddNewCategoryDialogComponent } from '../../../../shared/models/add-new-category-dialog/add-new-category-dialog.component';
 import { MatCardModule } from '@angular/material/card';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-category-list',
@@ -44,7 +45,8 @@ export class CategoryListComponent implements OnInit {
     private _titleService: TitleService,
     private _categoriesService: CategoriesService,
     public dialog: MatDialog,
-    public _changeDetectorRef: ChangeDetectorRef
+    public _changedetectorRef: ChangeDetectorRef,
+    private _toastrService: ToastrService
   ) {
     this._titleService.setTitle("Fastkart | Categories");
   }
@@ -68,8 +70,7 @@ export class CategoryListComponent implements OnInit {
     this._categoriesService.getAllCategories().subscribe((categories: Category[]) => {
       this.categoryList = categories;
       console.log(this.categoryList);
-      this._changeDetectorRef.detectChanges();
-      
+      this._changedetectorRef.detectChanges();
     });
   }
 
@@ -86,6 +87,17 @@ export class CategoryListComponent implements OnInit {
       } else {
         console.log('The dialog was closed without adding a new category.');
       }
+    });
+  }
+
+  // delete category by id
+  deleteCategory = (categoryId: string | undefined) => {
+    this._categoriesService.deleteCategoryById(categoryId).subscribe((category: Category) => {
+      this._toastrService.success("Category Deleted Succesfully");
+      this._changedetectorRef.detectChanges();
+      this.getCategoryList();
+    }, (error) => {
+      console.error(error)
     });
   }
 }
