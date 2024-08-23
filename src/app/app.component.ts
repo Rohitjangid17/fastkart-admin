@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, AfterViewInit, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './layout/header/header.component';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -7,6 +7,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { Subscription } from 'rxjs';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { FooterComponent } from './layout/footer/footer.component';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +19,8 @@ import { FooterComponent } from './layout/footer/footer.component';
     SidebarComponent,
     MatSidenavModule,
     MatToolbarModule,
-    FooterComponent,    
+    FooterComponent,
+    NgIf
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
@@ -28,16 +30,25 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   sidebarOpened: boolean = false;
   sidebarMode: 'side' | 'over' = 'side';
   private breakpointSubscription!: Subscription;
+  showHeaderFooterSidebar: boolean = true;
 
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private cdr: ChangeDetectorRef // Inject ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private router: Router
   ) { }
 
   ngOnInit() {
     // Initial setup: Hide sidebar
     this.sidebarMode = 'over';
     this.sidebarOpened = false;
+
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        // Logic to determine if header, footer, and sidebar should be shown
+        this.showHeaderFooterSidebar = !this.router.url.startsWith('/sign-up');
+      }
+    });
   }
 
   ngAfterViewInit() {

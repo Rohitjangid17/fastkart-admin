@@ -1,10 +1,10 @@
 <mat-drawer-container>
-  <mat-drawer [mode]="sidebarMode" [opened]="sidebarOpened">
+  <mat-drawer *ngIf="showHeaderFooterSidebar" [mode]="sidebarMode" [opened]="sidebarOpened">
     <app-sidebar />
   </mat-drawer>
   <mat-drawer-content>
-    <app-header (toggleSidebarForMe)="sidebarToggler()" />
+    <app-header *ngIf="showHeaderFooterSidebar" (toggleSidebarForMe)="sidebarToggler()" />
     <router-outlet />
-    <app-footer />
+    <app-footer *ngIf="showHeaderFooterSidebar" />
   </mat-drawer-content>
 </mat-drawer-container>

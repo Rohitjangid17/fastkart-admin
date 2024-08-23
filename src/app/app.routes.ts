@@ -6,6 +6,7 @@ import { ordersRoutes } from './modules/admin/orders/orders.routes';
 import { settingsRoutes } from './modules/admin/settings/settings.routes';
 import { customersRoutes } from './modules/admin/customers/customers.routes';
 import { productReviewRoutes } from './modules/admin/product-review/product-review.routes';
+import { SignUpComponent } from './modules/auth/sign-up/sign-up.component';
 
 export const routes: Routes = [
     {
@@ -32,4 +33,7 @@ export const routes: Routes = [
     {
         path: "", children: productReviewRoutes
     },
+    {
+        path: "sign-up", component: SignUpComponent
+    }
 ];
