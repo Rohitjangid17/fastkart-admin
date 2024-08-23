@@ -7,7 +7,7 @@
     </ng-template>
 
 
-    <button mat-icon-button (click)="addCategoryDialogClose()" aria-label="Close dialog"
+    <button mat-icon-button (click)="dialogClose()" aria-label="Close dialog"
         class="!text-white !w-auto !h-auto !px-2 !py-2">
         <mat-icon>close</mat-icon>
     </button>
@@ -54,7 +54,7 @@
 
 </form>
 <div mat-dialog-actions class="flex justify-end p-4 border-t border-gray-200">
-    <button mat-button (click)="addCategoryDialogClose()" class="mr-2 text-gray-600 hover:text-gray-900">Cancel</button>
+    <button mat-button (click)="dialogClose()" class="mr-2 text-gray-600 hover:text-gray-900">Cancel</button>
     <ng-container *ngIf="!isCategoryEdit; else updateCategory">
         <button mat-button (click)="onSave()" type="button"
             class="!bg-[#4f966e] !text-white !text-md !px-4" [disabled]="addCategoryForm.invalid">Add Category</button>

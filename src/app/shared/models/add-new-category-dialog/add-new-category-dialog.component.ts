@@ -67,7 +67,7 @@ export class AddNewCategoryDialogComponent implements OnInit {
   }
 
   // add category dialog close
-  addCategoryDialogClose = () => {
+  dialogClose = () => {
     console.log("save category button click!!!");
     return this._dialogRef.close();
   }

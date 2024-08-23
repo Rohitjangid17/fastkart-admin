@@ -83,6 +83,7 @@ export class CategoryListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((category: Category) => {
       if (category) {
+        this._changedetectorRef.detectChanges();
         this.getCategoryList();
       } else {
         console.log('The dialog was closed without adding a new category.');
@@ -99,6 +100,7 @@ export class CategoryListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((category: Category) => {
       if (category) {
+        this._changedetectorRef.detectChanges();
         this.getCategoryList();
       } else {
         console.log('The dialog was closed without updating category.');
