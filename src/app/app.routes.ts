@@ -10,7 +10,7 @@ import { SignUpComponent } from './modules/auth/sign-up/sign-up.component';
 
 export const routes: Routes = [
     {
-        path: "", redirectTo: "/dashboard", pathMatch: "full"
+        path: "", redirectTo: "/sign-up", pathMatch: "full"
     },
     {
         path: "dashboard", component: DashboardComponent
