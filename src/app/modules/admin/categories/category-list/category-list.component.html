@@ -28,7 +28,7 @@
 
     <!-- category list start here -->
     <ng-container *ngIf="isListview; else gridview">
-        <div class="overflow-y-auto ">
+        <div class="scroll-height">
             <ng-container *ngIf="categoryList.length > 0; else noCategories">
                 <table class="w-full shadow border overflow-x-auto relative">
                     <thead>
@@ -93,7 +93,7 @@
     </ng-container>
     <ng-template #gridview>
         <ng-container *ngIf="categoryList.length > 0; else noProducts">
-            <div class="h-[360px] overflow-y-auto">
+            <div class="scroll-height">
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-3">
                     <ng-container *ngFor="let category of categoryList">
                         <mat-card class="w-full border shadow-md rounded-lg material-card">

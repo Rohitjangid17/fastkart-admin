@@ -103,3 +103,54 @@ mat-drawer-container {
     right: 0;
     transition: all 0.3s ease;
 }
+
+.scroll-height {
+    height: calc(100vh - 240px) !important;
+    overflow: auto;
+}
+
+.panel-scroll {
+    height: calc(100vh - 160px) !important;
+    overflow: auto;
+}
+
+.mdc-text-field:not(.mdc-text-field--invalid):not(.mdc-text-field--focused):not(.mdc-text-field--disabled) {
+    .mdc-notched-outline>* {
+        border-color: #4a5568 !important;
+    }
+}
+
+/* When the text field is focused */
+.mdc-text-field.mdc-text-field--focused .mdc-notched-outline > * {
+    border-color: #4f966e !important; /* Change to your desired color */
+}
+
+/* When the text field is valid (not empty and valid input) */
+// .mdc-text-field.mdc-text-field--valid .mdc-notched-outline > * {
+//     border-color: #2ecc71 !important; /* Change to your desired color */
+// }
+
+/* When the text field is invalid (empty or invalid input) */
+// .mdc-text-field.mdc-text-field--invalid .mdc-notched-outline > * {
+//     border-color: #e74c3c !important; /* Change to your desired color */
+// }
+
+/* When the text field is focused */
+.mdc-text-field.mdc-text-field--focused .mdc-floating-label {
+    color: #4f966e !important; /* Change to your desired color */
+}
+
+/* When the text field is valid */
+// .mdc-text-field.mdc-text-field--valid .mdc-floating-label {
+//     color: #2ecc71 !important; /* Change to your desired color */
+// }
+
+/* When the text field is invalid */
+// .mdc-text-field.mdc-text-field--invalid .mdc-floating-label {
+//     color: #e74c3c !important; /* Change to your desired color */
+// }
+
+/* When the text field is touched (using a custom class) */
+// .mdc-text-field.mdc-text-field--touched .mdc-floating-label {
+//     color: #f39c12 !important; /* Change to your desired color */
+// }
