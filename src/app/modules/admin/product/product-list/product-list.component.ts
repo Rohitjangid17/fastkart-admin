@@ -12,6 +12,7 @@ import { ProductService } from '../product.service';
 import { Product } from '../../../../shared/interfaces/common.type';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-product-list',
@@ -42,7 +43,8 @@ export class ProductListComponent implements OnInit {
   constructor(
     private _titleService: TitleService,
     private _productService: ProductService,
-    private _changeDetectorRef: ChangeDetectorRef
+    private _changeDetectorRef: ChangeDetectorRef,
+    private _toastrService: ToastrService
   ) {
     this._titleService.setTitle("Fastkart | Products");
   }
@@ -71,8 +73,10 @@ export class ProductListComponent implements OnInit {
   deleteProduct = (productId: string | undefined) => {
     this._productService.deleteProductById(productId).subscribe((product: Product) => {
       console.log(product);
+      this._toastrService.success("Product Deleted Succesfully");
       this.getProducts();
     }, (error) => {
+      this._toastrService.error(error);
       console.log(error);
     });
   }

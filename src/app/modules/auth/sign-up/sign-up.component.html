@@ -6,44 +6,45 @@
         <div class="grid grid-cols-1">
             <mat-form-field appearance="outline">
                 <mat-label>Store Name</mat-label>
-                <input matInput placeholder="Search Product">
+                <input matInput formControlName="storeName" placeholder="Search Product">
             </mat-form-field>
             <mat-form-field appearance="outline">
                 <mat-label>Business Type</mat-label>
-                <input matInput placeholder="Search Product">
+                <input matInput formControlName="businessType" placeholder="Search Product">
             </mat-form-field>
             <mat-form-field appearance="outline">
                 <mat-label>Currency</mat-label>
-                <input matInput placeholder="Search Product">
+                <input matInput formControlName="currency" placeholder="Search Product">
             </mat-form-field>
             <mat-form-field appearance="outline">
                 <mat-label>Address</mat-label>
-                <input matInput placeholder="Search Product">
+                <input matInput formControlName="address" placeholder="Search Product">
             </mat-form-field>
             <mat-form-field appearance="outline">
                 <mat-label>Email</mat-label>
-                <input matInput placeholder="Search Product">
+                <input matInput formControlName="email" placeholder="Search Product">
             </mat-form-field>
             <mat-form-field appearance="outline">
                 <mat-label>Select Country</mat-label>
-                <input matInput placeholder="Search Product">
+                <input matInput formControlName="country" placeholder="Search Product">
             </mat-form-field>
             <mat-form-field appearance="outline">
                 <mat-label>Select State</mat-label>
-                <input matInput placeholder="Search Product">
+                <input matInput formControlName="state" placeholder="Search Product">
             </mat-form-field>
             <mat-form-field appearance="outline">
                 <mat-label>Pin Code</mat-label>
-                <input matInput placeholder="Search Product">
+                <input matInput formControlName="pinCode" placeholder="Search Product">
             </mat-form-field>
             <mat-form-field appearance="outline">
                 <mat-label>City</mat-label>
-                <input matInput placeholder="Search Product">
+                <input matInput formControlName="city" placeholder="Search Product">
             </mat-form-field>
         </div>
         <div class="flex items-center justify-end gap-x-2">
             <button mat-button class="!text-md !px-4 !text-gray-600 !hover:text-gray-900 !bg-gray-200">Cancel</button>
-            <button mat-button class="!bg-[#4f966e] !text-white !text-md !px-4" (click)="createStore()" matTooltip="Add Category">
+            <button mat-button class="!bg-[#4f966e] !text-white !text-md !px-4" [disabled]="this.createStoreForm.invalid" (click)="createStore()"
+                matTooltip="Add Category">
                 Save
             </button>
         </div>

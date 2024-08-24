@@ -24,7 +24,7 @@
                                 <mat-label>Category</mat-label>
                                 <mat-select formControlName="category">
                                     <ng-container *ngFor="let category of categoryList">
-                                        <mat-option [value]="category">{{category | titlecase }}</mat-option>
+                                        <mat-option [value]="category._id">{{category.title }}</mat-option>
                                     </ng-container>
                                 </mat-select>
                             </mat-form-field>
@@ -175,8 +175,9 @@
                     </ng-container>
 
                     <ng-template #updateProduct>
-                        <button mat-button class="!bg-[#4f966e] !text-white !text-md !px-4" (click)="updateProductById()"
-                            [disabled]="addProductForm.invalid" matTooltip="Update Product">
+                        <button mat-button class="!bg-[#4f966e] !text-white !text-md !px-4"
+                            (click)="updateProductById()" [disabled]="addProductForm.invalid"
+                            matTooltip="Update Product">
                             <mat-icon>save</mat-icon>
                             Update Product
                         </button>

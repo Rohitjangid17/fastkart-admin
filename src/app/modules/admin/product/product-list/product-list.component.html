@@ -66,7 +66,7 @@
                                 <td class="p-2 text-left text-[#4a5568] text-md border-b">{{product.price}}</td>
                                 <td class="p-2 text-left text-[#4a5568] text-md w-28 border-b whitespace-nowrap">
                                     <span
-                                        [ngClass]="product.availabilityStatus === 'Low Stock' ? 'bg-[#e2245426] text-[#e22454]' : 'bg-[#2f873326] text-[#2f8733]'"
+                                        [ngClass]="product.availabilityStatus === 'Out Of Stock' ? 'bg-[#e2245426] text-[#e22454]' : 'bg-[#2f873326] text-[#2f8733]'"
                                         class="py-1 px-3 text-xs text-normal rounded-full">
                                         {{product.availabilityStatus}}
                                     </span>
@@ -128,7 +128,7 @@
                                 <p class="text-gray-800 mt-2 font-medium">Category: {{ product.category }}</p>
                                 <p class="text-gray-800 mt-2 font-medium">Price: {{ product.price }}</p>
                                 <span
-                                    [ngClass]="product.availabilityStatus ==='Low Stock' ? 'bg-[#e2245426] text-[#e22454]' : 'bg-[#2f873326] text-[#2f8733]'"
+                                    [ngClass]="product.availabilityStatus === 'Out Of Stock' ? 'bg-[#e2245426] text-[#e22454]' : 'bg-[#2f873326] text-[#2f8733]'"
                                     class="py-1 px-3 text-xs text-normal rounded-full">
                                     {{product.availabilityStatus}}
                                 </span>

@@ -7,12 +7,13 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { ProductService } from '../product.service';
-import { Product } from '../../../../shared/interfaces/common.type';
+import { Category, Product } from '../../../../shared/interfaces/common.type';
 import { NgFor, NgIf, TitleCasePipe } from '@angular/common';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { CategoriesService } from '../../categories/categories.service';
 
 @Component({
   selector: 'app-add-product',
@@ -37,7 +38,7 @@ import { ToastrModule, ToastrService } from 'ngx-toastr';
 export class AddProductComponent implements OnInit {
   pageTitle: string = "";
   isHeaderAction: boolean = false;
-  categoryList: string[] = [];
+  categoryList: Category[] = [];
   brandList: string[] = [];
   stockStatusList: string[] = ["In Stock", "Out Of Stock"]
   warrantyInformationList: string[] = ["1 week warranty", "1 Month Warrunty", "2 Months Warrunty", "3 Months Warrunty", "4 Months Warrunty",]
@@ -50,6 +51,7 @@ export class AddProductComponent implements OnInit {
   constructor(
     private _titleService: TitleService,
     private _productService: ProductService,
+    private _categoryService: CategoriesService,
     private _formBuilder: FormBuilder,
     private _router: Router,
     private _activatedRoute: ActivatedRoute,
@@ -66,7 +68,7 @@ export class AddProductComponent implements OnInit {
       discountPercentage: ["", [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/), Validators.min(0), Validators.max(100)]],
       // rating: ["", [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/), Validators.min(0), Validators.max(5)]],
       stock: ["", [Validators.required, Validators.pattern(/^\d+$/), Validators.min(0)]],
-      brand: ["", Validators.required],
+      brand: [""],
       warrantyInformation: ["", Validators.required],
       shippingInformation: ["", Validators.required],
       availabilityStatus: ["", Validators.required],
@@ -76,7 +78,7 @@ export class AddProductComponent implements OnInit {
       // thumbnail: ["", [Validators.required]]
     });
 
-    this.getProductList();
+    this.getCategories();
 
     this.getSingleProductById();
 
@@ -90,19 +92,29 @@ export class AddProductComponent implements OnInit {
     }
   }
 
-  // get product list
-  getProductList = () => {
-    this._productService.getProductList().subscribe(products => {
-      const categories = products.map(product => product.category);
-      const brands = products.map(product => product.brand);
-      this.categoryList = [...new Set(categories)];
-      this.brandList = [...new Set(brands)];
+  // get category list
+  getCategories = () => {
+    this._categoryService.getAllCategories().subscribe((categories: Category[]) => {
+      this.categoryList = categories;
       console.log(this.categoryList);
-      console.log(this.brandList);
     }, (error) => {
-      console.log(error);
+      console.error(error);
+      this.categoryList = [];
     });
   }
+
+  // getProductList = () => {
+  //   this._productService.getProductList().subscribe(products => {
+  //     const categories = products.map(product => product.category);
+  //     const brands = products.map(product => product.brand);
+  //     this.categoryList = [...new Set(categories)];
+  //     this.brandList = [...new Set(brands)];
+  //     console.log(this.categoryList);
+  //     console.log(this.brandList);
+  //   }, (error) => {
+  //     console.log(error);
+  //   });
+  // }
 
   // Add Product
   addProduct = () => {
@@ -188,9 +200,10 @@ export class AddProductComponent implements OnInit {
     }
 
     this._productService.updateProductById(this.productId, productData).subscribe((product: Product) => {
-      alert("Product Updated!!");
+      this._toastrService.success("Product Updated Succesfully");
       this._router.navigate(["/products"]);
     }, (error) => {
+      this._toastrService.error(error);
       console.log(error);
     });
   }
