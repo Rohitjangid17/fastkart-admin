@@ -29,7 +29,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   title = 'fastkart-admin';
   sidebarOpened: boolean = false;
   sidebarMode: 'side' | 'over' = 'side';
-  private breakpointSubscription!: Subscription;
+  breakpointSubscription!: Subscription;
   showHeaderFooterSidebar: boolean = true;
 
   constructor(
@@ -46,7 +46,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         // Logic to determine if header, footer, and sidebar should be shown
-        this.showHeaderFooterSidebar = !this.router.url.startsWith('/sign-up');
+        this.showHeaderFooterSidebar = !this.router.url.startsWith('/sign-up') && !this.router.url.startsWith("/sign-in");
       }
     });
   }

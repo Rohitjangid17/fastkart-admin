@@ -7,6 +7,7 @@ import { settingsRoutes } from './modules/admin/settings/settings.routes';
 import { customersRoutes } from './modules/admin/customers/customers.routes';
 import { productReviewRoutes } from './modules/admin/product-review/product-review.routes';
 import { SignUpComponent } from './modules/auth/sign-up/sign-up.component';
+import { SigninComponent } from './modules/auth/signin/signin.component';
 
 export const routes: Routes = [
     {
@@ -35,5 +36,8 @@ export const routes: Routes = [
     },
     {
         path: "sign-up", component: SignUpComponent
-    }
+    },
+    {
+        path: "sign-in", component: SigninComponent
+    },
 ];
