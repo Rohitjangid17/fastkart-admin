@@ -78,7 +78,8 @@ export class SignUpComponent {
     this._authService.storeRegister(storeData).subscribe((store: any) => {
       if (store) {
         this._toastrService.success("Store created successfully");
-        this._router.navigate(["/dashboard"]);
+        localStorage.setItem("user", store)
+        this._router.navigate(["/sign-in"]);
       }
     }, (error) => {
       this._toastrService.error(error.message);
