@@ -5,17 +5,19 @@
     <form [formGroup]="signinForm">
         <div class="grid grid-cols-1">
             <mat-form-field appearance="outline">
-                <mat-label>Store Name</mat-label>
-                <input matInput formControlName="mobileNumber" placeholder="Enter your mobile number" />
+                <mat-label>Mobile Number</mat-label>
+                <input matInput formControlName="mobileNumber" minlength="10" maxlength="10"
+                    placeholder="Mobile Number">
             </mat-form-field>
             <mat-form-field appearance="outline">
                 <mat-label>Password</mat-label>
-                <input matInput formControlName="password" type="password" placeholder="Enter your password" />
+                <input matInput formControlName="password" type="password" minlength="4" maxlength="4"
+                    placeholder="Password" />
             </mat-form-field>
         </div>
         <div class="flex items-center justify-end gap-x-2">
             <button mat-button class="!text-md !px-4 !text-gray-600 !hover:text-gray-900 !bg-gray-200">Cancel</button>
-            <button mat-button class="!bg-[#4f966e] !text-white !text-md !px-4" (click)="signin()" matTooltip="Signin">
+            <button mat-button class="!bg-[#4f966e] !text-white !text-md !px-4" [disabled]="this.signinForm.invalid" (click)="signin()" matTooltip="Signin">
                 Signin
             </button>
         </div>

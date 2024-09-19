@@ -43,3 +43,24 @@ export interface Category {
     createdAt?: string
     __v?: number
 }
+
+export interface StoreRegister {
+    storeName: string
+    businessType: string
+    currency: string
+    address: string
+    email: string
+    mobileNumber: number
+    password: string
+    country: string
+    state: string
+    pinCode: number
+    city: string
+    createdAt: string
+    updatedAt: string
+}
+
+export interface StoreLogin {
+    email: string
+    mobileNumber: number
+}

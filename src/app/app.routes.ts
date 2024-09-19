@@ -8,13 +8,14 @@ import { customersRoutes } from './modules/admin/customers/customers.routes';
 import { productReviewRoutes } from './modules/admin/product-review/product-review.routes';
 import { SignUpComponent } from './modules/auth/sign-up/sign-up.component';
 import { SigninComponent } from './modules/auth/signin/signin.component';
+import { AuthGuard } from './core/guard/auth.guard';
 
 export const routes: Routes = [
     {
         path: "", redirectTo: "/sign-up", pathMatch: "full"
     },
     {
-        path: "dashboard", component: DashboardComponent
+        path: "dashboard", component: DashboardComponent, canActivate: [AuthGuard]
     },
     {
         path: "", children: productRoutes

@@ -47,10 +47,12 @@ export class SignUpComponent {
       businessType: ["", Validators.required],
       currency: ["", Validators.required],
       address: ["", Validators.required],
-      email: ["", Validators.required],
+      email: ["", [Validators.required, Validators.email]],
+      mobileNumber: ["", [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern(/^\d{10}$/)]],
+      password: ["", [Validators.required, Validators.minLength(4)]],
       country: ["", Validators.required],
       state: ["", Validators.required],
-      pinCode: ["", Validators.required],
+      pinCode: ["", [Validators.required, Validators.minLength(6), Validators.maxLength(6), Validators.pattern(/^\d{6}$/)]],
       city: ["", Validators.required],
     });
   }
@@ -68,17 +70,20 @@ export class SignUpComponent {
       currency: this.createStoreForm.get("currency")?.value,
       address: this.createStoreForm.get("address")?.value,
       email: this.createStoreForm.get("email")?.value,
+      mobileNumber: this.createStoreForm.get("mobileNumber")?.value,
+      password: this.createStoreForm.get("password")?.value,
       country: this.createStoreForm.get("country")?.value,
       state: this.createStoreForm.get("state")?.value,
-      pinCode: +this.createStoreForm.get("pinCode")?.value,
+      pinCode: this.createStoreForm.get("pinCode")?.value,
       city: this.createStoreForm.get("city")?.value,
     }
     console.log(storeData);
 
-    this._authService.storeRegister(storeData).subscribe((store: any) => {
-      if (store) {
+    this._authService.storeRegister(storeData).subscribe((storeRegister: any) => {
+      console.log(storeRegister);
+      if (storeRegister) {
         this._toastrService.success("Store created successfully");
-        localStorage.setItem("user", store)
+        localStorage.setItem("user", storeRegister)
         this._router.navigate(["/sign-in"]);
       }
     }, (error) => {
